@@ -4,17 +4,21 @@
   position: relative;
   display: flex;
   align-items: flex-end;
+  height: 3rem;
   background: $navbar-background-color;
   color: $page-default-font-color;
   z-index: 2;
 
   .navbar-left {
-    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    padding-left: 0.5rem;
+    height: 100%;
     flex: 1;
 
     .home-logo {
-      height: 6rem;
-      width: 6rem;
+      height: 2rem;
+      width: 2rem;
       cursor: pointer;
     }
   }

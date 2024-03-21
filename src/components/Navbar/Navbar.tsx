@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 
-import logo from '../../assets/astral-express.png';
+import logo from '../../assets/astral-express-logo.png';
 import MenuIcon from '../Icons/MenuIcon';
 
 import './Navbar.scss';

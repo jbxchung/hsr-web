@@ -10,6 +10,11 @@ export interface User {
   authToken?: string;
 }
 
+export interface UserLoginRequest {
+    name: string;
+    password: string;
+}
+
 export const useUser = () => {
   const { user, setUser } = useContext(AuthContext);
   const { setItem } = useLocalStorage();
