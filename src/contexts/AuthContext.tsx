@@ -1,5 +1,5 @@
-import { FC, PropsWithChildren, ReactElement, ReactNode, createContext, useState } from 'react';
-import { User, UserLoginRequest } from '../hooks/useUser';
+import { FC, PropsWithChildren, ReactElement, createContext, useState } from 'react';
+import { User, UserLoginRequest } from '../types/User';
 import { getApiBaseUrl } from '../utils/HostUtils';
 
 interface IAuthContext {
@@ -18,6 +18,7 @@ export const AuthContext = createContext<IAuthContext>({
   clearLoginError: () => {},
 });
 
+// TODO - move all API calls to separate service
 const BASE_URL = getApiBaseUrl();
 
 export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement => {

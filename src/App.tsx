@@ -2,8 +2,7 @@
 import { FC } from 'react';
 import LoginPage from './components/Login/Login';
 import Navbar from './components/Navbar/Navbar';
-import { AuthContext, AuthProvider } from './contexts/AuthContext';
-import { useAuth } from './hooks/useAuth';
+import { AuthProvider } from './contexts/AuthContext';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import './App.scss';

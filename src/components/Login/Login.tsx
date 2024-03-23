@@ -1,6 +1,6 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
-import { UserLoginRequest } from '../../hooks/useUser';
+import { UserLoginRequest } from '../../types/User';
 
 import './Login.scss';
 
