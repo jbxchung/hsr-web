@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren, ReactElement, createContext, useState } from 'react';
 import { User, UserLoginRequest } from '../types/User';
-import { getApiBaseUrl } from '../utils/HostUtils';
+import * as AuthService from '../services/authService';
 
 interface IAuthContext {
   user: User | null;
@@ -18,37 +18,23 @@ export const AuthContext = createContext<IAuthContext>({
   clearLoginError: () => {},
 });
 
-// TODO - move all API calls to separate service
-const BASE_URL = getApiBaseUrl();
-
 export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement => {
   const [user, setUser] = useState<User | null>(null);
   const [loginError, setLoginError] = useState<string | null>(null);
 
   const login = async (userLoginRequest: UserLoginRequest) => {
     try {
-      const loginResp = await fetch(`${BASE_URL}/api/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userLoginRequest)
-      });
-      
-      const loginResponseBody = await loginResp.json();
+      const loginResponseBody = await AuthService.doLogin(userLoginRequest);
 
       if (!loginResponseBody.status) {
-        // failed login
         setLoginError(loginResponseBody.payload);
       } else {
         console.log('Login success', loginResponseBody);
-        if (loginResponseBody) {
-          const user: User = loginResponseBody.payload;
-          setUser(user);
-        }
+        const user: User = loginResponseBody.payload;
+        setUser(user);
       }
     } catch (e) {
-      console.error('Error during login attempt', e);
+      console.error('Error processing login response', e);
     }
   };
     
