@@ -5,7 +5,7 @@ import { UserLoginRequest } from '../../hooks/useUser';
 import './Login.scss';
 
 const LoginPage: FC = () => {
-  const { login, loginError, setLoginError } = useAuth();
+  const { user, login, loginError, clearLoginError } = useAuth();
 
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -20,8 +20,12 @@ const LoginPage: FC = () => {
 
   // any time the login fields are changed, remove the error
   useEffect(() => {
-    setLoginError('');
+    clearLoginError();
   }, [username, password]);
+
+  useEffect(() => {
+    console.log('user from useAuth hook changed', user);
+  }, [user])
 
   return (
     <div className="login-form">
@@ -36,6 +40,7 @@ const LoginPage: FC = () => {
       <button onClick={submitLogin}>
         Login
       </button>
+      {user && `logged in as ${user.email}`}
       <span>{loginError}</span>
     </div>
   )
