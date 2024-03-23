@@ -2,6 +2,8 @@ import { FC, useCallback, useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { UserLoginRequest } from '../../hooks/useUser';
 
+import './Login.scss';
+
 const LoginPage: FC = () => {
   const { login, loginError, setLoginError } = useAuth();
 
@@ -22,11 +24,15 @@ const LoginPage: FC = () => {
   }, [username, password]);
 
   return (
-    <div>
-      <label htmlFor='username'>Username</label>
-      <input id='username' value={username} onChange={(e) => setUsername(e.target.value)} />
-      <label htmlFor='password'>Password</label>
-      <input id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+    <div className="login-form">
+      <div className="login-field">
+        <label htmlFor='username'>Username</label>
+        <input id='username' value={username} onChange={(e) => setUsername(e.target.value)} />
+      </div>
+      <div className="login-field">
+        <label htmlFor='password'>Password</label>
+        <input id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+      </div>
       <button onClick={submitLogin}>
         Login
       </button>

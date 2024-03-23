@@ -15,7 +15,7 @@ const App: FC = () => {
     <BrowserRouter>
       <AuthContext.Provider value={{ user, setUser }}>
         <Navbar />
-        <div>
+        <div className="main-content">
           <h1>init</h1>
           <LoginPage />
         </div>
