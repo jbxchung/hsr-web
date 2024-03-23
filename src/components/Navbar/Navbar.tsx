@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/useAuth';
@@ -11,14 +11,19 @@ import logo from '../../assets/astral-express-logo.png';
 import './Navbar.scss';
 
 const Navbar: FC = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const [showNavMenu, setShowNavMenu] = useState(false);
+  const [showUserDropdown, setShowUserDropdown] = useState(false);
 
   const location = useLocation();
 
   const pages = getRoleBasedPages(user);
 
-  console.log(pages);
+  // TODO - extract nav dropdown to its own component
+  const toggleUserDropdown = useCallback(() => {
+    console.log(showUserDropdown);
+    setShowUserDropdown(!showUserDropdown);
+  }, [showUserDropdown, setShowUserDropdown]);
 
   return (
     <div className="navbar">
@@ -34,22 +39,31 @@ const Navbar: FC = () => {
             pages.map(({ path, title }) => (
               <NavbarLink
                 key={path}
-                active={location.pathname.startsWith(path)}
+                active={path === '/' ? location.pathname === '/' : location.pathname.startsWith(path)}
                 target={path}
                 title={title}
                 onClick={() => {console.log('navber item clicked:', title)}}
               />
             ))
           }
-          
-          <div className="navbar-user">
+          {user ?
+            <div className={`navbar-link`} onClick={toggleUserDropdown}>
+              Logged In
+              {showUserDropdown &&
+                <div className="navbar-link-dropdown">
+                  
+                  <button onClick={logout}>Logout</button>
+                </div>
+              }
+            </div>
+            :
             <NavbarLink
-              active={false}
+              active={location.pathname.startsWith(LoginPage.path)}
               target={LoginPage.path}
               title={LoginPage.title}
               onClick={() => {console.log('login page nav click')}}
             />
-          </div>
+          }
         </div>
       </div>
     </div>
