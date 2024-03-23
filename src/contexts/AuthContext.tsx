@@ -7,7 +7,7 @@ interface IAuthContext {
   login: (userLoginRequest: UserLoginRequest) => void;
   logout: () => void;
   loginError: string | null,
-  clearLoginError: () => void;
+  setLoginError: (val: string | null) => void;
 }
 
 export const AuthContext = createContext<IAuthContext>({
@@ -15,9 +15,10 @@ export const AuthContext = createContext<IAuthContext>({
   login: () => {},
   logout: () => {},
   loginError: null,
-  clearLoginError: () => {},
+  setLoginError: () => {},
 });
 
+// provide user login context to all children
 export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement => {
   const [user, setUser] = useState<User | null>(null);
   const [loginError, setLoginError] = useState<string | null>(null);
@@ -41,13 +42,9 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement 
   const logout = () => {
     setUser(null);
   };
-
-  const clearLoginError = () => {
-    setLoginError(null);
-  }
   
   return (
-    <AuthContext.Provider value={{ user, login, logout, loginError, clearLoginError }}>
+    <AuthContext.Provider value={{ user, login, logout, loginError, setLoginError }}>
       {children}
     </AuthContext.Provider>
   );

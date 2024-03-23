@@ -1,26 +1,18 @@
-// import FC from 'react';
+import { FC, MouseEventHandler } from 'react';
 
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
+interface Props {
+  active: boolean;
+  target: string;
+  title: string;
+  onClick: MouseEventHandler;
+}
 
-// class NavbarLink extends Component {
-//   constructor(props) {
-//     super(props);
+const NavbarLink: FC<Props> = (props: Props) => (
+  <div className={`navbar-link${props.active ? ' active' : ''}`} onClick={props.onClick}>
+    <Link to={props.target}>{props.title}</Link>
+  </div>
+)
 
-//     this.onClick = this.onClick.bind(this);
-//   }
-
-//   onClick() {
-//     this.props.onClick(this.props.target);
-//   }
-
-//   render() {
-//     return (
-//       <div className={`navbar-link${this.props.active ? ' active' : ''}`} onClick={this.onClick}>
-//         <Link ref={this.linkRef} to={this.props.target}>{this.props.title}</Link>
-//       </div>
-//     );
-//   }
-// }
-
-// export default NavbarLink;
+export default NavbarLink;

@@ -5,12 +5,21 @@ import { UserLoginRequest } from '../../types/User';
 import './Login.scss';
 
 const LoginPage: FC = () => {
-  const { user, login, loginError, clearLoginError } = useAuth();
+  const { user, login, loginError, setLoginError: setLoginError } = useAuth();
 
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const submitLogin = useCallback(() => {
+    if (!username) {
+      setLoginError('Username is required.')
+      return;
+    }
+    if (!password) {
+      setLoginError('Password is required.')
+      return;
+    }
+
     const userLoginFields: UserLoginRequest = {
       username,
       password,
@@ -18,13 +27,15 @@ const LoginPage: FC = () => {
     login(userLoginFields);
   }, [username, password]);
 
-  // any time the login fields are changed, remove the error
+  // any time the login fields are changed, remove any errors
   useEffect(() => {
-    clearLoginError();
+    setLoginError(null);
   }, [username, password]);
 
   useEffect(() => {
-    console.log('user from useAuth hook changed', user);
+    if (user) {
+      console.log('TODO: redirect on user authenticated', user);
+    }
   }, [user])
 
   return (
