@@ -1,4 +1,6 @@
 import { FC, PropsWithChildren, ReactElement, createContext, useState } from 'react';
+import useCookie from 'react-use-cookie';
+
 import { User, UserLoginRequest } from '../types/User';
 import * as AuthService from '../services/authService';
 
@@ -20,7 +22,10 @@ export const AuthContext = createContext<IAuthContext>({
 
 // provide user login context to all children
 export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement => {
-  const [user, setUser] = useState<User | null>(null);
+  const [cachedUser, setCachedUser] = useCookie('user');
+  const initialUser = cachedUser ? JSON.parse(cachedUser) : null;
+
+  const [user, setUser] = useState<User | null>(initialUser);
   const [loginError, setLoginError] = useState<string | null>(null);
 
   const login = async (userLoginRequest: UserLoginRequest) => {
@@ -33,6 +38,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement 
         console.log('Login success', loginResponseBody);
         const user: User = loginResponseBody.payload;
         setUser(user);
+        setCachedUser(JSON.stringify(user))
       }
     } catch (e) {
       console.error('Error processing login response', e);
@@ -41,6 +47,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement 
     
   const logout = () => {
     setUser(null);
+    setCachedUser('')
   };
   
   return (

@@ -3,7 +3,7 @@ export interface User {
   name: string;
   email: string;
   role: UserRole;
-  authToken?: string;
+  token: string;
 }
 
 export enum UserRole {
