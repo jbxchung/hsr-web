@@ -1,27 +1,34 @@
 @import './styles/variables.scss';
 
-html, body, .root {
+html, body {
     margin: 0;
+    height: 100%;
 
-    .main-content {
-        position: relative;
-        flex: 1;
+    #root {
         display: flex;
-        justify-content: center;
-        background: $main-content-background-color;
-        color: $page-default-font-color;
-        overflow: auto;
-        z-index: 1;
-    
-        .bg {
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: url('./assets/background.webp'); 
-        //   filter: blur(8px);
-          z-index: -1;
+        flex-direction: column;
+        height: 100%;
+        font-family: Calibri, Helvetica, Arial, sans-serif;
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            background: $main-content-background-color;
+            color: $page-default-font-color;
+            overflow: auto;
+            z-index: 1;
+        
+            .bg {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: url('./assets/background.webp'); 
+                //   filter: blur(8px);
+                z-index: -1;
+            }
         }
     }
 }

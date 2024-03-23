@@ -48,7 +48,7 @@ const LoginPage: FC = () => {
         <label htmlFor='password'>Password</label>
         <input id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
       </div>
-      <button onClick={submitLogin}>
+      <button className="login-button" onClick={submitLogin}>
         Login
       </button>
       {user && `logged in as ${user.email}`}
