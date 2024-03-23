@@ -14,7 +14,7 @@ const Navbar: FC = () => {
         <img src={logo} alt="logo" className="home-logo" onClick={() => window.location.href = '/'} />
       </div>
       <div className="navbar-content">
-        <span onClick={() => setShowNavMenu(!showNavMenu)}>
+        <span className="navbar-menu-icon" onClick={() => setShowNavMenu(!showNavMenu)}>
           <MenuIcon />
         </span>
         <div className={`navbar-links${showNavMenu ? ' open' : ''}`}>

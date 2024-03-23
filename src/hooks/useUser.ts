@@ -4,14 +4,20 @@ import { useLocalStorage } from './useLocalStorage';
 
 // todo: move this into a separate file
 export interface User {
-  id: string;
+  id: number;
   name: string;
   email: string;
+  role: UserRole;
   authToken?: string;
 }
 
+export enum UserRole {
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+}
+
 export interface UserLoginRequest {
-    name: string;
+    username: string;
     password: string;
 }
 

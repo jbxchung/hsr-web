@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useUser, User, UserLoginRequest } from './useUser';
 import { useLocalStorage } from './useLocalStorage';
 
@@ -10,6 +10,8 @@ export const useAuth = () => {
   // we can re export the user methods or object from this hook
   const { user, addUser, removeUser, setUser } = useUser();
   const { getItem, setItem, removeItem } = useLocalStorage();
+  
+  const [ loginError, setLoginError ] = useState<string>('');
 
   useEffect(() => {
     const user = getItem('user');
@@ -19,17 +21,30 @@ export const useAuth = () => {
   }, [addUser, getItem]);
 
   const login = async (userLoginRequest: UserLoginRequest) => {
-    const loginResp = await fetch(`${BASE_URL}/auth/login`, {
-      method: 'POST',
-      body: JSON.stringify(userLoginRequest)
-    });
-    
-    const loginResponseBody = await loginResp.json();
+    try {
+      const loginResp = await fetch(`${BASE_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userLoginRequest)
+      });
+      
+      const loginResponseBody = await loginResp.json();
 
-    if (loginResponseBody) {
-      // TODO - verify payload and create interface
-      const user = loginResponseBody;
-      addUser(user);
+      if (!loginResponseBody.status) {
+        // failed login
+        setLoginError(loginResponseBody.payload);
+      } else {
+        console.log('Login success', loginResponseBody);
+        if (loginResponseBody) {
+          // TODO - verify payload and create interface
+          const user: User = loginResponseBody.payload;
+          addUser(user);
+        }
+      }
+    } catch (e) {
+      console.error('Error during login attempt', e);
     }
   };
     
@@ -37,5 +52,5 @@ export const useAuth = () => {
     removeUser();
   }
 
-  return { user, login, logout, setUser };
+  return { user, login, logout, loginError, setLoginError, setUser };
 };
