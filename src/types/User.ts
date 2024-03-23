@@ -9,6 +9,7 @@ export interface User {
 export enum UserRole {
   ADMIN = 'ADMIN',
   USER = 'USER',
+  PUBLIC = 'PUBLIC',
 }
 
 export interface UserLoginRequest {

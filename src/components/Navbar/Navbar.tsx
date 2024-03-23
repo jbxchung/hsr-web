@@ -1,12 +1,24 @@
 import { FC, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-import logo from '../../assets/astral-express-logo.png';
+import { useAuth } from '../../hooks/useAuth';
+import { LoginPage, getRoleBasedPages } from '../pages';
+
+import NavbarLink from './NavbarLink';
 import MenuIcon from '../Icons/MenuIcon';
 
+import logo from '../../assets/astral-express-logo.png';
 import './Navbar.scss';
 
 const Navbar: FC = () => {
+  const { user } = useAuth();
   const [showNavMenu, setShowNavMenu] = useState(false);
+
+  const location = useLocation();
+
+  const pages = getRoleBasedPages(user);
+
+  console.log(pages);
 
   return (
     <div className="navbar">
@@ -19,30 +31,24 @@ const Navbar: FC = () => {
         </span>
         <div className={`navbar-links${showNavMenu ? ' open' : ''}`}>
           {
-            // Object.keys(pageMapping).map((pageName) => {
-            //   const page = pageMapping[pageName];
-            //   let url = page.url;
-            //   let isActive = this.props.activePageId === url;
-            //   if (Array.isArray(page.url)) {
-            //     url = page.url[0];
-            //     isActive = url.indexOf(this.props.activePageId) !== -1;
-            //   }
-
-            //   return (
-            //     <NavbarLink
-            //       active={isActive}
-            //       key={url}
-            //       onClick={this.onNavbarItemClick}
-            //       target={url}
-            //       title={page.navbarTitle}
-            //     />
-            //   );
-            // })
+            pages.map(({ path, title }) => (
+              <NavbarLink
+                key={path}
+                active={location.pathname.startsWith(path)}
+                target={path}
+                title={title}
+                onClick={() => {console.log('navber item clicked:', title)}}
+              />
+            ))
           }
-          navbar links placeholder
           
           <div className="navbar-user">
-            login / user placeholder
+            <NavbarLink
+              active={false}
+              target={LoginPage.path}
+              title={LoginPage.title}
+              onClick={() => {console.log('login page nav click')}}
+            />
           </div>
         </div>
       </div>
