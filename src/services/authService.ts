@@ -19,6 +19,10 @@ export const doLogin = async (loginRequest: UserLoginRequest) => {
     return await loginResp.json();
   } catch (e) {
     console.error('Error during login attempt', e);
+    return {
+      status: false,
+      payload: 'Network error: ' + (e as Error).message
+    };
   }
 };
 

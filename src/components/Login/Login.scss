@@ -37,6 +37,20 @@
 
     .login-button {
         width: 100%;
+        height: 2rem;
+        border: none;
+        border-radius: 0.25rem;
         background-color: $button-primary-background-color;
+        text-align: center;
+        cursor: pointer;
+
+        &:active {
+            background-color: $button-primary-background-color-active;
+        }
+
+        &:disabled {
+            background-color: $button-disabled-background-color;
+            cursor: not-allowed;
+        }
     }
 }

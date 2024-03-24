@@ -5,10 +5,11 @@ import { UserLoginRequest } from '../../types/User';
 import './Login.scss';
 
 const LoginPage: FC = () => {
-  const { user, login, loginError, setLoginError: setLoginError } = useAuth();
+  const { user, login, loginError, setLoginError } = useAuth();
 
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [loginButtonDisabled, setLoginButtonDisabled] = useState<boolean>(true);
 
   const submitLogin = useCallback(() => {
     if (!username) {
@@ -29,8 +30,9 @@ const LoginPage: FC = () => {
 
   // any time the login fields are changed, remove any errors
   useEffect(() => {
+    setLoginButtonDisabled(!username || !password);
     setLoginError(null);
-  }, [username, password]);
+  }, [username, password, setLoginError, setLoginButtonDisabled]);
 
   // `user` is set when the user logs in
   useEffect(() => {
@@ -42,7 +44,7 @@ const LoginPage: FC = () => {
 
   // allow press enter to submit
   const handleKeyPressed = (e: KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && !loginButtonDisabled) {
       submitLogin();
     }
   };
@@ -68,13 +70,13 @@ const LoginPage: FC = () => {
       <div className="login-field">
         <input
           id="password"
-          placeholder="password"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           type="password"
           />
       </div>
-      <button className="login-button" onClick={submitLogin}>
+      <button className="login-button" disabled={loginButtonDisabled} onClick={submitLogin}>
         Login
       </button>
       {user && `logged in as ${user.email}`}
