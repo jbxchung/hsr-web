@@ -41,7 +41,11 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement 
         console.log('Login success', loginResponseBody);
         const user: User = loginResponseBody.payload;
         setUser(user);
-        setCachedUser(JSON.stringify(user))
+        setCachedUser(JSON.stringify(user), {
+          days: 1,
+          SameSite: 'Strict',
+          // Secure: true,
+        });
       }
     } catch (e) {
       console.error('Error processing login response', e);
