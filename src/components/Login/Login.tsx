@@ -79,8 +79,11 @@ const LoginPage: FC = () => {
       <button className="login-button" disabled={loginButtonDisabled} onClick={submitLogin}>
         Login
       </button>
-      {user && `logged in as ${user.email}`}
       <span>{loginError}</span>
+      <p className="disclaimer">
+        <b>Note: </b>
+        new account creation is centrally managed. Please check the assignment submission for credentials.
+      </p>
     </div>
   )
 };

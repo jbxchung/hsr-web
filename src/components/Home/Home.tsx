@@ -15,7 +15,7 @@ const Home: FC = () => {
         <li>user management (admin only)</li>
       </ul>
       <p>
-        Due to limited server capacity, new account creation has been disabled. Existing account credentials will be shared with assignment submission.
+        Due to limited server capacity, new account creation is centrally managed. Existing account credentials will be shared with assignment submission.
       </p>
     </div>
   );
