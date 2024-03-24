@@ -3,6 +3,7 @@ import useCookie from 'react-use-cookie';
 
 import { User, UserLoginRequest } from '../types/User';
 import * as AuthService from '../services/authService';
+import { useNavigate } from 'react-router-dom';
 
 interface IAuthContext {
   user: User | null;
@@ -22,6 +23,8 @@ export const AuthContext = createContext<IAuthContext>({
 
 // provide user login context to all children
 export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement => {
+  const navigate = useNavigate();
+
   const [cachedUser, setCachedUser] = useCookie('user');
   const initialUser = cachedUser ? JSON.parse(cachedUser) : null;
 
@@ -49,6 +52,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement 
     if (window.confirm('Are you sure you want to log out?')) {
       setUser(null);
       setCachedUser('');
+      navigate('/login');
     }
   };
   
