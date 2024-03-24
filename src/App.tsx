@@ -15,11 +15,16 @@ const App: FC = () => {
 
   return (<>
     <Navbar />
-    <div className="main-content">
+    <div className="main-content-wrapper">
       <div className="bg" />
       <Routes>
         {pages.map(pageConfig => (
-          <Route key={pageConfig.path} path={pageConfig.path} element={<pageConfig.component />} />
+          
+            <Route key={pageConfig.path} path={pageConfig.path} element={
+              <div className="main-content">
+                <pageConfig.component />
+              </div>
+            } />
         ))}
         <Route path="/login" element={<LoginPage />} />
       </Routes>
