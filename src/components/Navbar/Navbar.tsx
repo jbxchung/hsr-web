@@ -46,24 +46,26 @@ const Navbar: FC = () => {
               />
             ))
           }
-          {user ?
-            <div className={`navbar-link`} onClick={toggleUserDropdown}>
-              Logged In
-              {showUserDropdown &&
-                <div className="navbar-link-dropdown">
-                  
-                  <button onClick={logout}>Logout</button>
-                </div>
-              }
-            </div>
-            :
-            <NavbarLink
-              active={location.pathname.startsWith(LoginPage.path)}
-              target={LoginPage.path}
-              title={LoginPage.title}
-              onClick={() => {console.log('login page nav click')}}
-            />
-          }
+          <div className="navbar-right">
+            {user ?
+              <div className={`navbar-link`} onClick={toggleUserDropdown}>
+                Logged In
+                {showUserDropdown &&
+                  <div className="navbar-link-dropdown">
+                    
+                    <button onClick={logout}>Logout</button>
+                  </div>
+                }
+              </div>
+              :
+              <NavbarLink
+                active={location.pathname.startsWith(LoginPage.path)}
+                target={LoginPage.path}
+                title={LoginPage.title}
+                onClick={() => {console.log('login page nav click')}}
+              />
+            }
+          </div>
         </div>
       </div>
     </div>

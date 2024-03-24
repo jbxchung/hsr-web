@@ -12,9 +12,8 @@
   .navbar-left {
     display: flex;
     align-items: center;
-    padding-left: 0.5rem;
+    padding: 0 0.5rem;
     height: 100%;
-    flex: 1;
 
     .home-logo {
       height: 2rem;
@@ -24,18 +23,19 @@
   }
 
   .navbar-content {
+    flex: 1;
     display: flex;
     align-items: center;
     background: inherit;
 
     .navbar-links {
+      flex: 1;
       display: flex;
       align-items: center;
       background: inherit;
 
       .navbar-link {
         position: relative;
-        flex: 1;
         font-size: 1.2rem;
         color: $page-default-font-color;
         text-align: center;
@@ -63,6 +63,12 @@
           color: $navbar-link-hover-text-color;
           background: $navbar-link-hover-background-color;
         }
+      }
+
+      .navbar-right {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
       }
     }
 
