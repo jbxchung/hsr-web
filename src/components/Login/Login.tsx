@@ -32,21 +32,47 @@ const LoginPage: FC = () => {
     setLoginError(null);
   }, [username, password]);
 
+  // `user` is set when the user logs in
   useEffect(() => {
     if (user) {
       console.log('TODO: redirect on user authenticated', user);
     }
-  }, [user])
+  }, [user]);
+
+
+  // allow press enter to submit
+  const handleKeyPressed = (e: KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      submitLogin();
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPressed, false);
+    
+    return () => {
+      document.removeEventListener('keydown', handleKeyPressed, false);
+    }
+  }, [handleKeyPressed]);
 
   return (
     <div className="login-form">
+      <h1>Login</h1>
       <div className="login-field">
-        <label htmlFor='username'>Username</label>
-        <input id='username' value={username} onChange={(e) => setUsername(e.target.value)} />
+        <input
+          id="username"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          />
       </div>
       <div className="login-field">
-        <label htmlFor='password'>Password</label>
-        <input id='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input
+          id="password"
+          placeholder="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          type="password"
+          />
       </div>
       <button className="login-button" onClick={submitLogin}>
         Login
