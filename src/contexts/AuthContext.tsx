@@ -46,8 +46,10 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement 
   };
     
   const logout = () => {
-    setUser(null);
-    setCachedUser('')
+    if (window.confirm('Are you sure you want to log out?')) {
+      setUser(null);
+      setCachedUser('');
+    }
   };
   
   return (

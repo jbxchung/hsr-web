@@ -8,6 +8,7 @@ import NavbarLink from './NavbarLink';
 import MenuIcon from '../Icons/MenuIcon';
 
 import logo from '../../assets/astral-express-logo.png';
+import defaultProfilePicture from '../../assets/default-pfp.png';
 import './Navbar.scss';
 
 const Navbar: FC = () => {
@@ -36,7 +37,6 @@ const Navbar: FC = () => {
 
   // TODO - extract nav dropdown to its own component
   const toggleUserDropdown = useCallback(() => {
-    console.log(showUserDropdown);
     setShowUserDropdown(!showUserDropdown);
   }, [showUserDropdown, setShowUserDropdown]);
 
@@ -64,10 +64,13 @@ const Navbar: FC = () => {
           <div className="navbar-right">
             {user ?
               <div className={`navbar-link`} onClick={toggleUserDropdown}>
-                Logged In
+                <span className="user-profile-nav">
+                  <img src={defaultProfilePicture} alt="profile picture" className="profile-icon" />
+                  {user.username}
+                </span>
                 {showUserDropdown &&
                   <div className="navbar-link-dropdown">
-                    <button onClick={logout}>Logout</button>
+                    <span className="logout-button" onClick={logout}>Logout</span>
                   </div>
                 }
               </div>
