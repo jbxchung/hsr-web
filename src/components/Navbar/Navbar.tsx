@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/useAuth';
@@ -19,6 +19,21 @@ const Navbar: FC = () => {
 
   const pages = getRoleBasedPages(user);
 
+  // for mobile screen - on click, collapse navbar if open
+  const linkAreaRef = useRef<HTMLDivElement>(null);
+  const handleOutsideClick = (e: MouseEvent) => {
+    if (linkAreaRef.current && !linkAreaRef.current.contains(e.target as Element)) {
+      setShowNavMenu(false);
+    }
+  };
+  useEffect(() => {
+    document.addEventListener('click', handleOutsideClick, false);
+    
+    return () => {
+      document.removeEventListener('click', handleOutsideClick, false);
+    }
+  }, [handleOutsideClick]);
+
   // TODO - extract nav dropdown to its own component
   const toggleUserDropdown = useCallback(() => {
     console.log(showUserDropdown);
@@ -30,7 +45,7 @@ const Navbar: FC = () => {
       <div className="navbar-left">
         <img src={logo} alt="logo" className="home-logo" onClick={() => window.location.href = '/'} />
       </div>
-      <div className="navbar-content">
+      <div ref={linkAreaRef} className="navbar-content">
         <span className="navbar-menu-icon" onClick={() => setShowNavMenu(!showNavMenu)}>
           <MenuIcon />
         </span>
@@ -42,7 +57,7 @@ const Navbar: FC = () => {
                 active={path === '/' ? location.pathname === '/' : location.pathname.startsWith(path)}
                 target={path}
                 title={title}
-                onClick={() => {console.log('navber item clicked:', title)}}
+                onClick={() => {setShowNavMenu(false)}}
               />
             ))
           }
@@ -52,7 +67,6 @@ const Navbar: FC = () => {
                 Logged In
                 {showUserDropdown &&
                   <div className="navbar-link-dropdown">
-                    
                     <button onClick={logout}>Logout</button>
                   </div>
                 }
@@ -62,7 +76,7 @@ const Navbar: FC = () => {
                 active={location.pathname.startsWith(LoginPage.path)}
                 target={LoginPage.path}
                 title={LoginPage.title}
-                onClick={() => {console.log('login page nav click')}}
+                onClick={() => {setShowNavMenu(false)}}
               />
             }
           </div>
