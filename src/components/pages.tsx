@@ -1,6 +1,9 @@
 import { FC } from 'react';
 import Login from './Login/Login';
 import { User, UserRole } from '../types/User';
+import Home from './Home/Home';
+import Characters from './Characters/Characters';
+import LightCones from './LightCones/LightCones';
 
 interface PageConfig {
   title: string;
@@ -12,17 +15,17 @@ export const publicPages: PageConfig[] = [
   {
     title: 'Home',
     path: '/',
-    component: () => <div>home/landing page placeholder</div>,
+    component: Home,
   },
   {
     title: 'Characters',
     path: '/character',
-    component: () => <div>character page placeholder</div>,
+    component: Characters,
   },
   {
     title: 'Light Cones',
     path: '/lightcone',
-    component: () => <div>light cone page placeholder</div>,
+    component: LightCones,
   }
 ];
 
