@@ -1,24 +1,25 @@
-import { jwtDecode } from 'jwt-decode';
-
-import { UserLoginRequest } from '../types/User';
 import { getApiBaseUrl } from '../utils/HostUtils';
 
 
 const BASE_URL = getApiBaseUrl();
 
-export const doLogin = async (loginRequest: UserLoginRequest) => {
+let characterCache: any;
+export const getCharacters = async () => {
   try {
-    const loginResp = await fetch(`${BASE_URL}/api/auth/login`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(loginRequest)
-    });
-    
-    return loginResp.json();
+    if (!characterCache) {
+        const characterResp = await fetch(`${BASE_URL}/api/character/all`);
+        
+        // todo - define api response type
+        const responseObj: any = await characterResp.json();
+
+        if (responseObj.status) {
+            characterCache = responseObj.payload;
+        }
+    }
+
+    return Promise.resolve(characterCache);
   } catch (e) {
-    console.error('Error during login attempt', e);
+    console.error('Error getting characters', e);
     return {
       status: false,
       payload: 'Network error: ' + (e as Error).message
