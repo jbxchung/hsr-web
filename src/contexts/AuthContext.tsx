@@ -2,7 +2,7 @@ import { FC, PropsWithChildren, ReactElement, createContext, useState } from 're
 import useCookie from 'react-use-cookie';
 
 import { User, UserLoginRequest } from '../types/User';
-import * as AuthService from '../services/authService';
+import * as AuthService from '../api/Auth';
 import { useNavigate } from 'react-router-dom';
 
 interface IAuthContext {
