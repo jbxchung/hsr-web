@@ -69,7 +69,15 @@
             }
 
             .action-icon {
+                display: block;
+                width: 100%;
+                text-align: center;
                 cursor: pointer;
+
+                svg {
+                    height: 1.5rem;
+                    width: 1.5rem;
+                }
 
                 &.disabled {
                     fill: $icon-disabled-fill-color !important;
