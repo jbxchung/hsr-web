@@ -24,6 +24,7 @@ const Users: FC = () => {
             <th>Email</th>
             <th>Role</th>
             <th>Created</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -34,7 +35,7 @@ const Users: FC = () => {
       </table>
 
       <button className="primary new-user-button">
-        <PlusCircle />
+        {/* <PlusCircle /> */}
         Add New User
       </button>
     </div>

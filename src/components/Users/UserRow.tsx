@@ -1,6 +1,8 @@
-import { FC } from "react";
-import { User } from "../../types/User";
-import { useAuth } from "../../hooks/useAuth";
+import { FC } from 'react';
+import { User } from '../../types/User';
+import { useAuth } from '../../hooks/useAuth';
+import EditIcon from '../Icons/EditIcon';
+import DeleteIcon from '../Icons/DeleteIcon';
 
 interface UserRowProps {
   user: User;
@@ -15,6 +17,10 @@ const UserRow: FC<UserRowProps> = ({ user }) => {
       <td>{user.email}</td>
       <td>{user.role}</td>
       <td>{user.createdDate}</td>
+      <td>
+        <EditIcon />
+        <DeleteIcon />
+      </td>
     </tr>
   );
 }
