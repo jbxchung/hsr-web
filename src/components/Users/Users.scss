@@ -107,13 +107,10 @@
                 }
             }
         }
-
-        .new-user-button {
-            white-space: nowrap;
-
-            svg {
-                width: 2rem;
-            }
-        }
+    }
+    
+    .new-user-button {
+        margin-top: 1rem;
+        white-space: nowrap;
     }
 }

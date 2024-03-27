@@ -7,6 +7,7 @@ import { User } from '../../types/User';
 import PlusCircle from '../Icons/PlusCircle';
 import EditIcon from '../Icons/EditIcon';
 import DeleteIcon from '../Icons/DeleteIcon';
+import NewUserForm from './NewUserForm';
 
 // todo - handle loading state
 const Users: FC = () => {
@@ -42,6 +43,7 @@ const Users: FC = () => {
         {/* <PlusCircle /> */}
         Add New User
       </button>
+      {showNewUserForm && <NewUserForm />}
     </div>
   );
 };
