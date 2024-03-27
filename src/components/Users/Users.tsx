@@ -25,6 +25,7 @@ const Users: FC = () => {
             <th>Role</th>
             <th>Created</th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
