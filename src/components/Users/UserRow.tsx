@@ -78,24 +78,38 @@ const UserRow: FC<UserRowProps> = ({ user }) => {
       <td>{user.createdDate}</td>
       <td>
         {isEditing ? (
-          <span className="action-icon save" onClick={() => {
-            console.log('todo: save user', editableUser);
-            alert('todo: save user');
-            setIsEditing(false);
-          }}>
+          <span
+            className="action-icon save"
+            title="Save"
+            onClick={() => {
+              console.log('todo: save user', editableUser);
+              alert('todo: save user');
+              setIsEditing(false);
+            }}
+          >
             <SaveIcon />
           </span>
         ) : (
-          <span className="action-icon edit" onClick={() => setIsEditing(true)}><EditIcon /></span>
+          <span
+            className="action-icon edit"
+            title="Edit"
+            onClick={() => setIsEditing(true)}
+          >
+            <EditIcon />
+          </span>
         )}
       </td>
       <td>
-        <span className={`action-icon delete${allowDelete ? '' : ' disabled'}`} onClick={() => {
-          if (allowDelete) {
-            console.log('todo: delete user', user);
-            alert('todo: delete user');
-          }
-        }}>
+        <span
+          className={`action-icon delete${allowDelete ? '' : ' disabled'}`}
+          title={allowDelete ? 'Delete' : 'Why are you trying to delete yourself?'}
+          onClick={() => {
+            if (allowDelete) {
+              console.log('todo: delete user', user);
+              alert('todo: delete user');
+            }
+          }}
+        >
           <DeleteIcon />
         </span>
       </td>

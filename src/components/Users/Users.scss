@@ -1,6 +1,22 @@
 @import '../../styles/variables.scss';
 
 .users {
+    p {
+        .edit-hint {
+            color: $button-secondary-background-color;
+            fill: $button-secondary-background-color;
+        }
+
+        .delete-hint {
+            color: $button-danger-background-color;
+            fill: $button-danger-background-color;
+        }
+
+        svg {
+            height: 1rem;
+        }
+    }
+
     .users-table {
         width: 100%;
         text-align: left;
@@ -11,7 +27,7 @@
         }
         
         th, td {
-            padding: 0.5rem;
+            padding: 1rem;
         }
 
         thead {
@@ -20,11 +36,19 @@
 
         .user-row {
             // cursor: pointer;
-            input:disabled {
-                background: none;
-                border: none;
+            input {
+                width: 100%;
                 color: inherit;
-                cursor: text;
+                background: none;
+                outline: none;
+                border: none;
+                border-bottom: 1px solid $form-border-color;
+                box-sizing: border-box;
+
+                &:disabled {
+                    border-bottom: none;
+                    cursor: text;
+                }
             }
 
             select {
@@ -38,27 +62,9 @@
                     white-space: nowrap;
                 }
 
-                &::after {
-                    background-color: none;
-                }
                 option {
                     background: none;
                     color: inherit;
-                }
-            }
-
-
-            &.editing {
-                td {
-                    input {
-                        width: 100%;
-                        color: inherit;
-                        background: none;
-                        outline: none;
-                        border: none;
-                        border-bottom: 1px solid $form-border-color;
-                        box-sizing: border-box;
-                    }
                 }
             }
 
