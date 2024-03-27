@@ -3,10 +3,14 @@ import UserRow from './UserRow';
 import { useUsers } from '../../hooks/useUsers';
 
 import './Users.scss';
+import { User } from '../../types/User';
+import PlusCircle from '../Icons/PlusCircle';
 
 // todo - handle loading state
 const Users: FC = () => {
   const { users: userList, isLoading, error } = useUsers();
+
+  const [ newUser, setNewUser ] = useState<User | null>(null);
 
   return (
     <div className="users">
@@ -19,17 +23,20 @@ const Users: FC = () => {
             <th>Username</th>
             <th>Email</th>
             <th>Role</th>
+            <th>Created</th>
           </tr>
         </thead>
         <tbody>
           {userList?.map(user => (
             <UserRow key={user.id} user={user} />
           ))}
-          <tr>
-            <button className="new-user-button">Add New User</button>
-          </tr>
         </tbody>
       </table>
+
+      <button className="primary new-user-button">
+        <PlusCircle />
+        Add New User
+      </button>
     </div>
   );
 };

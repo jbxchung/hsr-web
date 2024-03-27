@@ -11,9 +11,10 @@ const UserRow: FC<UserRowProps> = ({ user }) => {
 
   return (
     <tr className={`user-row${user.id === currentUser?.id ? ' highlight' : ''}`}>
-      <td>{user.accountName}</td>
+      <td>{user.username}</td>
       <td>{user.email}</td>
       <td>{user.role}</td>
+      <td>{user.createdDate}</td>
     </tr>
   );
 }

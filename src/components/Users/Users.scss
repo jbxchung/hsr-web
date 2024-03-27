@@ -17,7 +17,11 @@
         }
 
         .new-user-button {
+            white-space: nowrap;
             
+            svg {
+                width: 2rem;
+            }
         }
     }
 }

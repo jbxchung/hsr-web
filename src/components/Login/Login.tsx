@@ -79,7 +79,7 @@ const LoginPage: FC = () => {
           type="password"
           />
       </div>
-      <button className="login-button" disabled={loginButtonDisabled} onClick={submitLogin}>
+      <button className="primary login-button" disabled={loginButtonDisabled} onClick={submitLogin}>
         Login
       </button>
       <span>{loginError}</span>
