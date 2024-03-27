@@ -3,8 +3,10 @@ import { useAuth } from '../../hooks/useAuth';
 import { UserLoginRequest } from '../../types/User';
 
 import './Login.scss';
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage: FC = () => {
+  const navigate = useNavigate();
   const { user, login, loginError, setLoginError } = useAuth();
 
   const [username, setUsername] = useState<string>('');
@@ -37,7 +39,8 @@ const LoginPage: FC = () => {
   // `user` is set when the user logs in
   useEffect(() => {
     if (user) {
-      console.log('TODO: redirect on user authenticated', user);
+      console.log('TODO: redirect based on url param', user);
+      navigate('/');
     }
   }, [user]);
 
