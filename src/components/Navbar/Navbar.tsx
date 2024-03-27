@@ -66,7 +66,7 @@ const Navbar: FC = () => {
               <div className={`navbar-link`} onClick={toggleUserDropdown}>
                 <span className="user-profile-nav">
                   <img src={defaultProfilePicture} alt="profile picture" className="profile-icon" />
-                  {user.username}
+                  {user.accountName}
                 </span>
                 {showUserDropdown &&
                   <div className="navbar-link-dropdown">

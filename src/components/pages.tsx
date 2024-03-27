@@ -4,6 +4,7 @@ import { User, UserRole } from '../types/User';
 import Home from './Home/Home';
 import Characters from './Characters/Characters';
 import LightCones from './LightCones/LightCones';
+import Users from './Users/Users';
 
 interface PageConfig {
   title: string;
@@ -37,7 +38,13 @@ const userPages = [
   }
 ];
 
-const adminPages: PageConfig[] = [];
+const adminPages: PageConfig[] = [
+  {
+    title: 'User Management',
+    path: '/users',
+    component: Users,
+  }
+];
 
 export const LoginPage: PageConfig = {
   title: 'Login',
