@@ -1,40 +1,44 @@
-import { FC, useState } from 'react';
+import { FC, MouseEvent, useEffect, useState } from 'react';
 import { UserRole } from '../../types/User';
 import Input from '../Input/Input';
 
-const NewUserForm: FC = () => {
+interface NewUserFormProps {
+  onCancelClick: (e: MouseEvent<HTMLButtonElement>) => void;
+}
+
+const NewUserForm: FC<NewUserFormProps> = (props: NewUserFormProps) => {
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [role, setRole] = useState<UserRole>(UserRole.USER);
   const [password, setPassword] = useState<string>('');
 
+  const [createButtonDisabled, setCreateButtonDisabled] = useState<boolean>(true);
+
+  useEffect(() => {
+    setCreateButtonDisabled(!username || !email || !password);
+  }, [username, email, password, setCreateButtonDisabled]);
+
+  const submitNewUser = (e: any) => {
+    alert('todo: submit new user');
+  }
+
   return (
     <div className="new-user-modal form">
       <h1>New User</h1>
-      {/* <div className="form-field">
-        <span className="placeholder">Username</span>
-        <input
-          id="username"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </div> */}
       <Input
+        required={true}
         className="form-field"
         placeholder="Username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
       />
-      <div className="form-field">
-        <label htmlFor="email-address">Email Address</label>
-        <input
-          id="email-address"
-          placeholder="Email Address"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
+      <Input
+        required={true}
+        className="form-field"
+        placeholder="Email Address"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
       <div className="form-field">
         <select
           value={role}
@@ -44,13 +48,20 @@ const NewUserForm: FC = () => {
           <option value={UserRole.USER}>User</option>
         </select>
       </div>
-      <div className="form-field">
-        <input
-          id="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+      <Input
+        required={true}
+        className="form-field"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <div className="form-buttons">
+        <button className="primary" disabled={createButtonDisabled} onClick={submitNewUser}>
+          Create
+        </button>
+        <button className="danger"  onClick={props.onCancelClick}>
+          Cancel
+        </button>
       </div>
     </div>
   )

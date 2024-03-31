@@ -17,8 +17,11 @@ const Input: FC<InputHTMLAttributes<HTMLInputElement>> = (props: InputHTMLAttrib
 
   return (
     <div className={`hsr-input ${minimizePlaceholder ? ' min-hint ' : ''}${props.className}`.trim()}>
-      <span className={`placeholder`}>{props.placeholder}</span>
+      <span className={`placeholder`}>{props.placeholder}
+        {props.required && <span className="required-indicator">*</span>}
+      </span>
       <input
+        required={props.required}
         value={props.value}
         onBlur={onBlur}
         onChange={props.onChange}

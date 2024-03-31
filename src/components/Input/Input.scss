@@ -14,6 +14,11 @@
         text-indent: 0.5rem;
         font-family: inherit;
         font-size: 85%;
+
+        .required-indicator {
+            text-indent: 0;
+            color: #ff0000;
+        }
     }
 
     input {

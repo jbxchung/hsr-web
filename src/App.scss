@@ -54,10 +54,6 @@ button {
     white-space: nowrap;
     cursor: pointer;
 
-    &:active {
-        background-color: $button-primary-background-color-active;
-    }
-
     &:disabled {
         background-color: $button-disabled-background-color !important;
         cursor: not-allowed;
@@ -65,10 +61,26 @@ button {
 
     &.primary {
         background-color: $button-primary-background-color;
+        
+        &:active {
+            background-color: $button-primary-background-color-active;
+        }
     }
 
     &.secondary {
         background-color: $button-secondary-background-color;
+
+        &:active {
+            background-color: $button-secondary-background-color-active;
+        }
+    }
+
+    &.danger {
+        background-color: $button-danger-background-color;
+        
+        &:active {
+            background-color: $button-danger-background-color-active;
+        }
     }
 }
 
