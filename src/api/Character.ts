@@ -1,3 +1,4 @@
+import { ApiResponse } from '../types/ApiResponse';
 import { getApiBaseUrl } from '../utils/HostUtils';
 
 
@@ -9,8 +10,8 @@ export const getCharacters = async () => {
     if (!characterCache) {
         const characterResp = await fetch(`${BASE_URL}/api/character/all`);
         
-        // todo - define api response type
-        const responseObj: any = await characterResp.json();
+        // todo - define character api response type
+        const responseObj: ApiResponse<any> = await characterResp.json() as ApiResponse<any>;
 
         if (responseObj.status) {
             characterCache = responseObj.payload;

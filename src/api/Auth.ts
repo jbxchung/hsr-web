@@ -2,11 +2,12 @@ import { jwtDecode } from 'jwt-decode';
 
 import { UserLoginRequest } from '../types/User';
 import { getApiBaseUrl } from '../utils/HostUtils';
+import { ApiResponse } from '../types/ApiResponse';
 
 
 const BASE_URL = getApiBaseUrl();
 
-export const doLogin = async (loginRequest: UserLoginRequest) => {
+export const doLogin = async (loginRequest: UserLoginRequest): Promise<ApiResponse<any>> => {
   try {
     const loginResp = await fetch(`${BASE_URL}/api/auth/login`, {
       method: 'POST',
