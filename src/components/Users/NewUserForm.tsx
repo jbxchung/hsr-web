@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 import { UserRole } from '../../types/User';
+import Input from '../Input/Input';
 
 const NewUserForm: FC = () => {
   const [username, setUsername] = useState<string>('');
@@ -10,7 +11,7 @@ const NewUserForm: FC = () => {
   return (
     <div className="new-user-modal form">
       <h1>New User</h1>
-      <div className="form-field">
+      {/* <div className="form-field">
         <span className="placeholder">Username</span>
         <input
           id="username"
@@ -18,7 +19,13 @@ const NewUserForm: FC = () => {
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-      </div>
+      </div> */}
+      <Input
+        className="form-field"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
       <div className="form-field">
         <label htmlFor="email-address">Email Address</label>
         <input

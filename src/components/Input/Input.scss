@@ -1,0 +1,47 @@
+@import '../../styles/variables.scss';
+
+.hsr-input {
+    position: relative;
+
+    .placeholder {
+        position: absolute;
+        padding: 0 2px;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        text-indent: 0.5rem;
+        font-family: inherit;
+        font-size: 85%;
+    }
+
+    input {
+        width: 100%;
+        height: 2rem;
+        font-family: inherit;
+        box-sizing: border-box;
+        border: 1px solid $form-input-border-color;
+        border-radius: 0.25rem;
+        background-color: $form-input-background-color;
+        text-indent: 0.5rem;
+        outline: none;
+
+        &:focus {
+            border-color: $form-input-border-color-focus;
+        }
+    }
+
+    
+    &.min-hint {
+        .placeholder {
+            top: 3px;
+            height: 0.5rem;
+            font-size: 60%;
+        }
+
+        input {
+            padding-top: 6px;
+        }
+    }
+}
