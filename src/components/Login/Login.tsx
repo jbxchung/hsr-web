@@ -60,9 +60,9 @@ const LoginPage: FC = () => {
   }, [handleKeyPressed]);
 
   return (
-    <div className="login-form">
+    <div className="form login-form">
       <h1>Login</h1>
-      <div className="login-field">
+      <div className="form-field">
         <input
           id="username"
           placeholder="Username"
@@ -70,7 +70,7 @@ const LoginPage: FC = () => {
           onChange={(e) => setUsername(e.target.value)}
           />
       </div>
-      <div className="login-field">
+      <div className="form-field">
         <input
           id="password"
           placeholder="Password"
@@ -79,7 +79,7 @@ const LoginPage: FC = () => {
           type="password"
           />
       </div>
-      <button className="primary login-button" disabled={loginButtonDisabled} onClick={submitLogin}>
+      <button className="primary form-button" disabled={loginButtonDisabled} onClick={submitLogin}>
         Login
       </button>
       <span>{loginError}</span>
