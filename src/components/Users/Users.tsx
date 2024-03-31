@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import UserRow from './UserRow';
 import { useUsers } from '../../hooks/useUsers';
 
@@ -11,7 +11,7 @@ import NewUserForm from './NewUserForm';
 
 // todo - handle loading state
 const Users: FC = () => {
-  const { users: userList, isLoading, error } = useUsers();
+  const { users: userList, isLoading, error, invoke: refreshUserList } = useUsers();
 
   const [showNewUserForm, setShowNewUserForm] = useState<boolean>(false);
 
@@ -34,7 +34,7 @@ const Users: FC = () => {
         </thead>
         <tbody>
           {userList?.map(user => (
-            <UserRow key={user.id} user={user} />
+            <UserRow key={user.id} user={user} onUserDeleted={refreshUserList} />
           ))}
         </tbody>
       </table>

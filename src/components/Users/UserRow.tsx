@@ -4,13 +4,18 @@ import { useAuth } from '../../hooks/useAuth';
 import EditIcon from '../Icons/EditIcon';
 import DeleteIcon from '../Icons/DeleteIcon';
 import SaveIcon from '../Icons/SaveIcon';
+import { useDeleteUser, usePostUser, usePutUser } from '../../hooks/useUsers';
 
 interface UserRowProps {
   user: User;
+  onUserDeleted: (user: User) => void;
 }
 
-const UserRow: FC<UserRowProps> = ({ user }) => {
+const UserRow: FC<UserRowProps> = ({ user, onUserDeleted }) => {
   const { user: currentUser } = useAuth();
+
+  const { user: updatedUser, isLoading: isUpdatingUser, error: errorUpdatingUser, invoke: updateUser } = usePutUser(user.username);
+  const { user: deletedUser, isLoading, error,invoke: deleteUser } = useDeleteUser(user.username);
 
   const [editableUser, setEditableUser] = useState<User>(user);
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -23,6 +28,19 @@ const UserRow: FC<UserRowProps> = ({ user }) => {
       usernameFieldRef.current.focus();
     }
   }, [isEditing]);
+
+  useEffect(() => {
+    if (updatedUser) {
+      console.log('updated user', updatedUser);
+    }
+  }, [updatedUser]);
+
+  useEffect(() => {
+    if (deletedUser) {
+      console.log('deleted user', deletedUser);
+      onUserDeleted(deletedUser);
+    }
+  }, [deletedUser]);
 
   // build css and render flags
   const cssClasses = [];
@@ -82,8 +100,7 @@ const UserRow: FC<UserRowProps> = ({ user }) => {
             className="action-icon save"
             title="Save"
             onClick={() => {
-              console.log('todo: save user', editableUser);
-              alert('todo: save user');
+              updateUser(editableUser);
               setIsEditing(false);
             }}
           >
@@ -105,8 +122,7 @@ const UserRow: FC<UserRowProps> = ({ user }) => {
           title={allowDelete ? 'Delete' : 'Why are you trying to delete yourself?'}
           onClick={() => {
             if (allowDelete) {
-              console.log('todo: delete user', user);
-              alert('todo: delete user');
+              deleteUser();
             }
           }}
         >
