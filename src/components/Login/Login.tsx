@@ -4,6 +4,7 @@ import { UserLoginRequest } from '../../types/User';
 
 import './Login.scss';
 import { useNavigate } from 'react-router-dom';
+import Input from '../Input/Input';
 
 const LoginPage: FC = () => {
   const navigate = useNavigate();
@@ -62,23 +63,18 @@ const LoginPage: FC = () => {
   return (
     <div className="form login-form">
       <h1>Login</h1>
-      <div className="form-field">
-        <input
-          id="username"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          />
-      </div>
-      <div className="form-field">
-        <input
-          id="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          />
-      </div>
+      <Input
+        className="form-field"
+        placeholder="Username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <Input
+        className="form-field"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <button className="primary form-button" disabled={loginButtonDisabled} onClick={submitLogin}>
         Login
       </button>
