@@ -34,7 +34,7 @@ const Users: FC = () => {
         </thead>
         <tbody>
           {userList?.map(user => (
-            <UserRow key={user.id} user={user} onUserDeleted={refreshUserList} />
+            <UserRow key={user.id} user={user} onUserDeleted={() => refreshUserList()} />
           ))}
         </tbody>
       </table>
@@ -43,7 +43,7 @@ const Users: FC = () => {
         {/* <PlusCircle /> */}
         Add New User
       </button>
-      {showNewUserForm && <NewUserForm closeModal={() => setShowNewUserForm(false)} />}
+      {showNewUserForm && <NewUserForm onUserCreated={() => refreshUserList()} closeModal={() => setShowNewUserForm(false)} />}
     </div>
   );
 };

@@ -1,10 +1,11 @@
 import { FC, MouseEvent, useCallback, useEffect, useState } from 'react';
-import { UserRole } from '../../types/User';
-import Input from '../Input/Input';
-import { useApiAuth } from '../../hooks/useApi';
+import { User, UserRole } from '../../types/User';
 import { usePostUser } from '../../hooks/useUsers';
 
+import Input from '../Input/Input';
+
 interface NewUserFormProps {
+  onUserCreated: (user?: User) => void;
   closeModal: (e?: MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -34,6 +35,7 @@ const NewUserForm: FC<NewUserFormProps> = (props: NewUserFormProps) => {
   useEffect(() => {
     if (createdUser) {
       console.log('created user', createdUser);
+      props.onUserCreated();
       props.closeModal();
     }
   }, [createdUser, errorCreatingUser]);
