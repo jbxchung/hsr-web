@@ -1,9 +1,11 @@
-import { FC, MouseEvent, useEffect, useState } from 'react';
+import { FC, MouseEvent, useCallback, useEffect, useState } from 'react';
 import { UserRole } from '../../types/User';
 import Input from '../Input/Input';
+import { useApiAuth } from '../../hooks/useApi';
+import { usePostUser } from '../../hooks/useUsers';
 
 interface NewUserFormProps {
-  onCancelClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  closeModal: (e?: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const NewUserForm: FC<NewUserFormProps> = (props: NewUserFormProps) => {
@@ -14,13 +16,33 @@ const NewUserForm: FC<NewUserFormProps> = (props: NewUserFormProps) => {
 
   const [createButtonDisabled, setCreateButtonDisabled] = useState<boolean>(true);
 
+  const { user: createdUser, isLoading, error: errorCreatingUser, invoke: createUser } = usePostUser();
+
   useEffect(() => {
     setCreateButtonDisabled(!username || !email || !password);
   }, [username, email, password, setCreateButtonDisabled]);
 
-  const submitNewUser = (e: any) => {
-    alert('todo: submit new user');
-  }
+  const submitNewUser = useCallback(async () => {
+    createUser({
+      username,
+      email,
+      role,
+      password,
+    });
+  }, [username, email, role, password]);
+
+  useEffect(() => {
+    if (createdUser) {
+      console.log('created user', createdUser);
+      props.closeModal();
+    }
+  }, [createdUser, errorCreatingUser]);
+
+  useEffect(() => {
+    if (errorCreatingUser) {
+      console.error('error creating user', errorCreatingUser);
+    }
+  }, [errorCreatingUser]);
 
   return (
     <div className="new-user-modal form">
@@ -59,7 +81,7 @@ const NewUserForm: FC<NewUserFormProps> = (props: NewUserFormProps) => {
         <button className="primary" disabled={createButtonDisabled} onClick={submitNewUser}>
           Create
         </button>
-        <button className="danger"  onClick={props.onCancelClick}>
+        <button className="danger"  onClick={props.closeModal}>
           Cancel
         </button>
       </div>

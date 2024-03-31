@@ -5,17 +5,34 @@ import { useAuth } from './useAuth';
 
 const BASE_URL = getApiBaseUrl();
 
+interface UseApiOptions extends RequestInit {
+  callOnInit?: boolean;
+}
+
+const UseApiDefaultOptions: UseApiOptions = {
+  callOnInit: true,
+};
+
 // expects JSON response
-export const useApi = <T>(url: string | URL | Request, options?: RequestInit | undefined ) => {
+export const useApi = <T>(url: string | URL | Request, options?: UseApiOptions | undefined ) => {
+  const fetchOptions: UseApiOptions = {
+    ...UseApiDefaultOptions,
+    ...options
+  };
+
   const [data, setData] = useState<T | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<any>(null);
 
-  const fetchData = async () => {
+  const fetchData = async (requestBody?: any) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${BASE_URL}${url}`, options);
+      if (requestBody) {
+        fetchOptions.body = JSON.stringify(requestBody);
+      }
+
+      const response = await fetch(`${BASE_URL}${url}`, fetchOptions);
       const data: ApiResponse<T> = await response.json();
       if (data.status) {
         setData(data.payload);
@@ -30,13 +47,15 @@ export const useApi = <T>(url: string | URL | Request, options?: RequestInit | u
   }
 
   useEffect(() => {
-    fetchData();
+    if (fetchOptions.callOnInit) {
+      fetchData();
+    }
   }, []);
 
-  return { response: data, isLoading, error };
+  return { response: data, isLoading, error, invoke: fetchData };
 };
 
-export const useApiAuth = <T>(url: string | URL | Request, options?: RequestInit | undefined ) => {
+export const useApiAuth = <T>(url: string | URL | Request, options?: UseApiOptions | undefined ) => {
   const { user: currentUser } = useAuth();
   
   return useApi<T>(url, {
@@ -45,5 +64,5 @@ export const useApiAuth = <T>(url: string | URL | Request, options?: RequestInit
       ...(options?.headers),
       'Authorization': 'Bearer ' + currentUser?.token
     }
-  })
+  });
 };

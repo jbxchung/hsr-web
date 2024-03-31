@@ -6,3 +6,15 @@ export const useUsers = () => {
   
   return { users, isLoading, error };
 };
+
+export const usePostUser = () => {
+  const { response: user, isLoading, error, invoke } = useApiAuth<User>('/api/user', {
+    callOnInit: false,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  
+  return { user, isLoading, error, invoke };
+};

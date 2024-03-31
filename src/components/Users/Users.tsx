@@ -43,7 +43,7 @@ const Users: FC = () => {
         {/* <PlusCircle /> */}
         Add New User
       </button>
-      {showNewUserForm && <NewUserForm onCancelClick={() => setShowNewUserForm(false)} />}
+      {showNewUserForm && <NewUserForm closeModal={() => setShowNewUserForm(false)} />}
     </div>
   );
 };
