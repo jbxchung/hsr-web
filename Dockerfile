@@ -1,5 +1,5 @@
 # Stage 1 - build react app
-FROM node:21-alpine3.18 as build
+FROM node:19-alpine as build
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ RUN npm run build
 
 
 # Stage 2 - run server
-FROM node:21-alpine3.18
+FROM node:19-alpine
 
 WORKDIR /app
 COPY package.json ./
