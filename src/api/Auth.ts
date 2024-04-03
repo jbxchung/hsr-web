@@ -9,7 +9,7 @@ const BASE_URL = getApiBaseUrl();
 
 export const doLogin = async (loginRequest: UserLoginRequest): Promise<ApiResponse<any>> => {
   try {
-    const loginResp = await fetch(`${BASE_URL}/api/auth/login`, {
+    const loginResp = await fetch(`${BASE_URL}/auth/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ export const doLogin = async (loginRequest: UserLoginRequest): Promise<ApiRespon
 
 // export const getUserInfo = async (sessionToken: string) => {
 //   try {
-//     const loginResp = await fetch(`${BASE_URL}/api/auth/info`, {
+//     const loginResp = await fetch(`${BASE_URL}/auth/info`, {
 //       method: 'POST',
 //       headers: {
 //         'Content-Type': 'application/json',

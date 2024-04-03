@@ -19,5 +19,5 @@ export function getEnv(): string {
 }
 
 export function getApiBaseUrl(): string {
-  return ENV_BASE_URL_MAP[getEnv()] as string;
+  return `${ENV_BASE_URL_MAP[getEnv()] as string}/hsr-service`;
 }

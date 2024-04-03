@@ -8,7 +8,7 @@ let characterCache: any;
 export const getCharacters = async () => {
   try {
     if (!characterCache) {
-        const characterResp = await fetch(`${BASE_URL}/api/character/all`);
+        const characterResp = await fetch(`${BASE_URL}/character/all`);
         
         // todo - define character api response type
         const responseObj: ApiResponse<any> = await characterResp.json() as ApiResponse<any>;
@@ -30,7 +30,7 @@ export const getCharacters = async () => {
 
 // export const getUserInfo = async (sessionToken: string) => {
 //   try {
-//     const loginResp = await fetch(`${BASE_URL}/api/auth/info`, {
+//     const loginResp = await fetch(`${BASE_URL}/auth/info`, {
 //       method: 'POST',
 //       headers: {
 //         'Content-Type': 'application/json',
