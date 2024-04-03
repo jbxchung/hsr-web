@@ -23,4 +23,4 @@ COPY --from=build /app/server /app/server
 RUN npm install --production
 
 EXPOSE 17715
-ENTRYPOINT [ "node", "./server/index.ts"]
+ENTRYPOINT [ "node", "./server/index.js"]
