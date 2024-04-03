@@ -1,5 +1,5 @@
 # Stage 1 - build react app
-FROM node:19-alpine as build
+FROM docker.io/node:18-alpine as build
 
 WORKDIR /app
 
@@ -12,7 +12,7 @@ RUN npm run build
 
 
 # Stage 2 - run server
-FROM node:19-alpine
+FROM docker.io/node:18-alpine
 
 WORKDIR /app
 COPY package.json ./
