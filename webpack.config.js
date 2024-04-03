@@ -39,6 +39,7 @@ module.exports = {
     historyApiFallback: true,
     port: 3000,
     hot: true,
+    allowedHosts: 'hsr.jbxchung.dev',
   },
   devtool: 'source-map',
 };
