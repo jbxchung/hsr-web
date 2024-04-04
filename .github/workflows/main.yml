@@ -2,7 +2,7 @@ name: CI to docker hub
 
 on:
   push:
-    branches: [ master, build-cicd ]
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
