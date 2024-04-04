@@ -6,6 +6,7 @@
   "scripts": {
     "start": "webpack serve",
     "build": "webpack --config webpack.config.js --mode production",
+    "serve": "node ./server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "jbc9953",
