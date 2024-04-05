@@ -22,6 +22,7 @@ const Input: FC<InputHTMLAttributes<HTMLInputElement>> = (props: InputHTMLAttrib
       </span>
       <input
         required={props.required}
+        type={props.type}
         value={props.value}
         onBlur={onBlur}
         onChange={props.onChange}

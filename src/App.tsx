@@ -2,7 +2,7 @@
 import { FC } from 'react';
 import LoginPage from './components/Login/Login';
 import Navbar from './components/Navbar/Navbar';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.scss';
 import { useAuth } from './hooks/useAuth';
@@ -27,6 +27,7 @@ const App: FC = () => {
             } />
         ))}
         <Route path="/login" element={<LoginPage />} />
+        {/* <Route path="*" element={<Navigate to="/login" />} /> */}
       </Routes>
     </div>
   </>);

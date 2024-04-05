@@ -72,6 +72,7 @@ const LoginPage: FC = () => {
       <Input
         className="form-field"
         placeholder="Password"
+        type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
