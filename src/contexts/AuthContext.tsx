@@ -9,6 +9,7 @@ interface IAuthContext {
   user: User | null;
   login: (userLoginRequest: UserLoginRequest) => void;
   logout: () => void;
+  isLoading: boolean;
   loginError: string | null,
   setLoginError: (val: string | null) => void;
 }
@@ -17,6 +18,7 @@ export const AuthContext = createContext<IAuthContext>({
   user: null,
   login: () => {},
   logout: () => {},
+  isLoading: false,
   loginError: null,
   setLoginError: () => {},
 });
@@ -29,10 +31,12 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement 
   const initialUser = cachedUser ? JSON.parse(cachedUser) : null;
 
   const [user, setUser] = useState<User | null>(initialUser);
+  const [isLoading, setIsLoading] = useState(false);
   const [loginError, setLoginError] = useState<string | null>(null);
 
   const login = async (userLoginRequest: UserLoginRequest) => {
     try {
+      setIsLoading(true);
       const loginResponseBody = await AuthService.doLogin(userLoginRequest);
 
       if (!loginResponseBody.status) {
@@ -49,6 +53,8 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement 
       }
     } catch (e) {
       console.error('Error processing login response', e);
+    } finally {
+      setIsLoading(false);
     }
   };
     
@@ -61,7 +67,7 @@ export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement 
   };
   
   return (
-    <AuthContext.Provider value={{ user, login, logout, loginError, setLoginError }}>
+    <AuthContext.Provider value={{ user, login, logout, isLoading, loginError, setLoginError }}>
       {children}
     </AuthContext.Provider>
   );

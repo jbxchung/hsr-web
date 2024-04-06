@@ -5,16 +5,23 @@ import { UserLoginRequest } from '../../types/User';
 import './Login.scss';
 import { useNavigate } from 'react-router-dom';
 import Input from '../Input/Input';
+import Loader from '../Loader/Loader';
 
 const LoginPage: FC = () => {
   const navigate = useNavigate();
-  const { user, login, loginError, setLoginError } = useAuth();
+  const { user, login, isLoading, loginError, setLoginError } = useAuth();
 
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loginButtonDisabled, setLoginButtonDisabled] = useState<boolean>(true);
 
   const submitLogin = useCallback(() => {
+    // already submitted, don't repeat
+    if (isLoading) {
+      return;
+    }
+
+    // field validation
     if (!username) {
       setLoginError('Username is required.')
       return;
@@ -29,7 +36,7 @@ const LoginPage: FC = () => {
       password,
     };
     login(userLoginFields);
-  }, [username, password]);
+  }, [username, password, isLoading]);
 
   // any time the login fields are changed, remove any errors
   useEffect(() => {
@@ -62,6 +69,11 @@ const LoginPage: FC = () => {
 
   return (
     <div className="form login-form">
+      {isLoading && (
+        <div className="loading-overlay">
+          <Loader />
+        </div>
+      )}
       <h1>Login</h1>
       <Input
         className="form-field"
