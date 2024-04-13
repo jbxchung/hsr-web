@@ -13,11 +13,23 @@ export interface Character {
 }
 
 export enum CharacterPath {
-  ERUDITION = 'Erudition'
+  ABUNDANCE = 'Abundance',
+  DESTRUCTION = 'Destruction',
+  ERUDITION = 'Erudition',
+  HARMONY = 'Harmony',
+  HUNT = 'Hunt',
+  NIHILITY = 'Nihility',
+  PRESERVATION = 'Preservation'
 }
 
 export enum Element {
-  FIRE = 'Fire'
+  FIRE = 'Fire',
+  ICE = 'Ice',
+  IMAGINARY = 'Imaginary',
+  LIGHTNING = 'Lightning',
+  PHYSICAL = 'Physical',
+  QUANTUM = 'Quantum',
+  WIND = 'Wind'
 }
 
 
