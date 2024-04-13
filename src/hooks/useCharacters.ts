@@ -2,10 +2,31 @@ import { useApi, useApiAuth } from './useApi';
 import { User } from '../types/User';
 import { Character, CharacterMap } from '../types/Character';
 
+let characterCache: CharacterMap | null = null;
 export const useCharacters = () => {
-  const { response: characters, isLoading, error, invoke } = useApi<CharacterMap>('/character/all');
-  
-  return { characters, isLoading, error, invoke };
+  const returnVal = {
+    characters: [],
+    isLoading: true,
+    error: null,
+    invoke: null,
+  };
+
+  if (characterCache) {
+    return {
+      characters: characterCache,
+      isLoading: false,
+      error: null,
+      invoke: () => {}
+    };
+  } else {
+    const { response: characters, isLoading, error, invoke } = useApi<CharacterMap>('/character/all');
+    
+    if (characters) {
+      characterCache = characters;
+    }
+    
+    return { characters, isLoading, error, invoke };
+  }
 };
 
 export const useThumbnail = (character: Character) => {
