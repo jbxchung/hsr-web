@@ -13,11 +13,12 @@ const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
 
   return (
     <div className="card">
-      <h3>{character.name}</h3>
-      <p>{character.description}</p>
-      {thumbnail &&
-        <img src={thumbnail} />
-      }
+      <div className={`card-thumbnail rarity-${character.rarity}`}>
+        {thumbnail &&
+          <img src={thumbnail} />
+        }
+      </div>
+      <div className="card-title">{character.name}</div>
     </div>
   );
 };

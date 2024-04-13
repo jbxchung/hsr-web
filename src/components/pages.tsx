@@ -20,12 +20,12 @@ export const publicPages: PageConfig[] = [
   },
   {
     title: 'Characters',
-    path: '/character',
+    path: '/characters',
     component: Characters,
   },
   {
     title: 'Light Cones',
-    path: '/lightcone',
+    path: '/lightcones',
     component: LightCones,
   }
 ];
