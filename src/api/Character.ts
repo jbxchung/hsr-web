@@ -1,32 +1,46 @@
 import { ApiResponse } from '../types/ApiResponse';
+import { Character } from '../types/Character';
 import { getApiBaseUrl } from '../utils/HostUtils';
 
 
 const BASE_URL = getApiBaseUrl();
 
-let characterCache: any;
-export const getCharacters = async () => {
-  try {
-    if (!characterCache) {
-        const characterResp = await fetch(`${BASE_URL}/character/all`);
+interface CharacterMap {
+  [id: string]: Character;
+}
+
+let characterCache: CharacterMap = {};
+// export const getCharacters: Promise<CharacterMap> = async () => {
+//   try {
+//     if (!characterCache) {
+//         const characterResp = await fetch(`${BASE_URL}/character/all`);
         
-        // todo - define character api response type
-        const responseObj: ApiResponse<any> = await characterResp.json() as ApiResponse<any>;
+//         // todo - define character api response type
+//         const responseObj: ApiResponse<Character[]> = await characterResp.json() as ApiResponse<Character[]>;
 
-        if (responseObj.status) {
-            characterCache = responseObj.payload;
-        }
-    }
+//         if (responseObj.status) {
+//           console.log(responseObj);
+//           const characterList = responseObj.payload;
 
-    return Promise.resolve(characterCache);
-  } catch (e) {
-    console.error('Error getting characters', e);
-    return {
-      status: false,
-      payload: 'Network error: ' + (e as Error).message
-    };
-  }
-};
+//           characterCache = characterList.reduce((map: CharacterMap, character: Character) => {
+//             map[character.id] = character;
+//           }, {});
+//         }
+//     }
+
+//     return Promise.resolve(characterCache);
+//   } catch (e) {
+//     console.error('Error getting characters', e);
+//     return {
+//       status: false,
+//       payload: 'Network error: ' + (e as Error).message
+//     };
+//   }
+// };
+
+// export const getThumbnail = async (characterId) => {
+
+// }
 
 // export const getUserInfo = async (sessionToken: string) => {
 //   try {

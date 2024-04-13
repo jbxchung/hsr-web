@@ -33,7 +33,23 @@ export const useApi = <T>(url: string | URL | Request, options?: UseApiOptions |
       }
 
       const response = await fetch(`${BASE_URL}${url}`, fetchOptions);
-      const data: ApiResponse<T> = await response.json();
+
+      let data: ApiResponse<T> = {
+        status: false,
+        payload: null
+      };
+      const contentType = response.headers.get('Content-Type');
+      if (contentType === 'image/webp') {
+        data = {
+          status: true,
+          payload: await response.blob() as T
+        };
+      } else if (contentType === 'application/json') {
+        data = await response.json();
+      } else {
+        setError(`Unrecognized MIME type from API response to ${url}`);
+      }
+      
       if (data.status) {
         setData(data.payload);
       } else {

@@ -1,19 +1,14 @@
 import { FC, useEffect, useState } from 'react';
-import { getCharacters } from '../../api/Character';
+// import { getCharacters } from '../../api/Character';
 import { useAuth } from '../../hooks/useAuth';
 import { UserRole } from '../../types/User';
+import { useCharacters } from '../../hooks/useCharacters';
+import { Character } from '../../types/Character';
+import CharacterCard from './CharacterCard';
 
 const Characters: FC = () => {
   const { user } = useAuth();
-  const [characterList, setCharacterList] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const characters = await getCharacters();
-      console.log(characters);
-      setCharacterList(characters);
-    })();
-  }, [setCharacterList]);
+  const { characters } = useCharacters();
 
   return (
     <div className="characters">
@@ -24,12 +19,8 @@ const Characters: FC = () => {
         </div>
       )}
       <div className="card-list">
-        {characterList.map(c => JSON.stringify(c))}
+        {characters && Object.values(characters).map(c => <CharacterCard key={c.id} character={c} />)}
           {/* {"id":"testcharacter","name":"test character","rarity":5,"path":"Erudition","element":"Fire","description":"test description"} */}
-        <div className="card">
-          <h3>Character Name</h3>
-          placeholder
-        </div>
       </div>
     </div>
   );
