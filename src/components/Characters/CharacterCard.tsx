@@ -16,7 +16,7 @@ const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
       <h3>{character.name}</h3>
       <p>{character.description}</p>
       {thumbnail &&
-        <img src={URL.createObjectURL(thumbnail)} />
+        <img src={thumbnail} />
       }
     </div>
   );

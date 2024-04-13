@@ -9,7 +9,7 @@ export interface Character {
   path: CharacterPath;
   element: Element;
   description: string;
-  thumbnail?: File;
+  thumbnail?: string;
 }
 
 export enum CharacterPath {

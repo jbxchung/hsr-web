@@ -1,16 +1,8 @@
 import { useApi, useApiAuth } from './useApi';
-import { User } from '../types/User';
 import { Character, CharacterMap } from '../types/Character';
 
 let characterCache: CharacterMap | null = null;
 export const useCharacters = () => {
-  const returnVal = {
-    characters: [],
-    isLoading: true,
-    error: null,
-    invoke: null,
-  };
-
   if (characterCache) {
     return {
       characters: characterCache,
@@ -19,10 +11,10 @@ export const useCharacters = () => {
       invoke: () => {}
     };
   } else {
-    const { response: characters, isLoading, error, invoke } = useApi<CharacterMap>('/character/all');
+    const { response: characters, isLoading, error, invoke } = useApi<Array<Character>>('/character/all');
     
     if (characters) {
-      characterCache = characters;
+      characterCache = Object.fromEntries(characters.map((c) => [c.id, c]));
     }
     
     return { characters, isLoading, error, invoke };
@@ -30,9 +22,27 @@ export const useCharacters = () => {
 };
 
 export const useThumbnail = (character: Character) => {
-    const { response: thumbnail, isLoading, error, invoke } = useApi<Blob>(`/character/${character.name}/thumbnail`);
+  if (characterCache && characterCache[character.id]?.thumbnail) {
+    return {
+      thumbnail: characterCache[character.id].thumbnail,
+      isLoading: false,
+      error: null,
+      invoke: () => {}
+    };
+  } else {
+    const { response, isLoading, error, invoke } = useApi<Blob>(`/character/${character.name}/thumbnail`);
+
+    let thumbnail = null;
+    if (response) {
+      thumbnail = URL.createObjectURL(response);
+    }
+
+    if (thumbnail && characterCache && characterCache[character.id]) {
+      characterCache[character.id].thumbnail = thumbnail;
+    }
 
     return { thumbnail, isLoading, error, invoke };
+  }
 }
 
 export const usePostCharacter = () => {
