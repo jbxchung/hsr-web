@@ -21,9 +21,7 @@ const App: FC = () => {
         {pages.map(pageConfig => (
           
             <Route key={pageConfig.path} path={pageConfig.path} element={
-              <div className="main-content">
-                <pageConfig.component />
-              </div>
+              <pageConfig.component />
             } />
         ))}
         <Route path="/login" element={<LoginPage />} />

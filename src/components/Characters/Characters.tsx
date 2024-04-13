@@ -3,8 +3,9 @@ import { FC, useEffect, useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { UserRole } from '../../types/User';
 import { useCharacters } from '../../hooks/useCharacters';
-import { Character } from '../../types/Character';
 import CharacterCard from './CharacterCard';
+
+import './Characters.scss';
 
 const Characters: FC = () => {
   const { user } = useAuth();
