@@ -14,13 +14,9 @@ const Characters: FC = () => {
 
   return (
     <div className="characters">
-      {user?.role === UserRole.ADMIN && (
-        <div className="admin-action-panel">
-          <h2>Admin Actions</h2>
-          <p>todo: move this as an empty + card in the list below</p>
-          <button className="button primary" onClick={() => alert('todo: open new character form')}>Add New Character</button>
-        </div>
-      )}
+      <div className="filter-bar">
+        todo: implement filter and search
+      </div>
       <div className="card-list">
         {user?.role === UserRole.ADMIN && (
           <div className="card new-character" onClick={() => alert('todo: open form to add new character')}>
