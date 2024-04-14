@@ -3,10 +3,10 @@ import UserRow from './UserRow';
 import { useUsers } from '../../hooks/useUsers';
 
 import './Users.scss';
-import EditIcon from '../Icons/EditIcon';
-import DeleteIcon from '../Icons/DeleteIcon';
+import EditIcon from '../../components/Icons/EditIcon';
+import DeleteIcon from '../../components/Icons/DeleteIcon';
 import NewUserForm from './NewUserForm';
-import Loader from '../Loader/Loader';
+import Loader from '../../components/Loader/Loader';
 
 const Users: FC = () => {
   const { users: userList, isLoading, error, invoke: refreshUserList } = useUsers();

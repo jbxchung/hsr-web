@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useGameEntities } from '../../hooks/useGameEntities';
 import { GameEntityType } from '../../types/GameEntity';
-import CardList from '../Card/CardList';
+import CardList from '../../components/Card/CardList';
 
 import './LightCones.scss';
 

@@ -1,9 +1,9 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { User, UserRole } from '../../types/User';
 import { useAuth } from '../../hooks/useAuth';
-import EditIcon from '../Icons/EditIcon';
-import DeleteIcon from '../Icons/DeleteIcon';
-import SaveIcon from '../Icons/SaveIcon';
+import EditIcon from '../../components/Icons/EditIcon';
+import DeleteIcon from '../../components/Icons/DeleteIcon';
+import SaveIcon from '../../components/Icons/SaveIcon';
 import { useDeleteUser, usePostUser, usePutUser } from '../../hooks/useUsers';
 
 interface UserRowProps {

@@ -2,7 +2,7 @@ import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/useAuth';
-import { LoginPage, getRoleBasedPages } from '../pages';
+import { LoginPage, getRoleBasedPages } from '../../pages';
 
 import NavbarLink from './NavbarLink';
 import MenuIcon from '../Icons/MenuIcon';

@@ -4,8 +4,8 @@ import { UserLoginRequest } from '../../types/User';
 
 import './Login.scss';
 import { useNavigate } from 'react-router-dom';
-import Input from '../Input/Input';
-import Loader from '../Loader/Loader';
+import Input from '../../components/Input/Input';
+import Loader from '../../components/Loader/Loader';
 
 const LoginPage: FC = () => {
   const navigate = useNavigate();
