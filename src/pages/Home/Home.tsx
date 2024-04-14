@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 const Home: FC = () => {
   return (
-    <div className="home">
+    <div className="main-content home">
       <h1>Welcome to HSR-DB!</h1>
       <h2>This application is a project for CS-GY 6083 Principles of Database Systems.</h2>
       <p>

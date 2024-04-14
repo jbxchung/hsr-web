@@ -1,12 +1,12 @@
 
 import { FC } from 'react';
-import LoginPage from './components/Login/Login';
+import LoginPage from './pages/Login/Login';
 import Navbar from './components/Navbar/Navbar';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.scss';
 import { useAuth } from './hooks/useAuth';
-import { getRoleBasedPages } from './components/pages';
+import { getRoleBasedPages } from './pages';
 
 const App: FC = () => {
   const { user } = useAuth();
@@ -18,14 +18,14 @@ const App: FC = () => {
     <div className="main-content-wrapper">
       <div className="bg" />
       <Routes>
-        {pages.map(pageConfig => (
-          
-            <Route key={pageConfig.path} path={pageConfig.path} element={
-              <div className="main-content">
-                <pageConfig.component />
-              </div>
-            } />
-        ))}
+        {pages.map(pageConfig => (<>
+          <Route key={pageConfig.path} path={pageConfig.path} element={
+            <pageConfig.component />
+          } />
+          <Route key={`${pageConfig.path}_wildcard`} path={`${pageConfig.path}/*`} element={
+            <pageConfig.component />
+          } />
+        </>))}
         <Route path="/login" element={<LoginPage />} />
         {/* <Route path="*" element={<Navigate to="/login" />} /> */}
       </Routes>

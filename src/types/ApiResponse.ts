@@ -1,4 +1,4 @@
 export interface ApiResponse<T> {
   status: boolean;
-  payload: T;
+  payload: T | null;
 }

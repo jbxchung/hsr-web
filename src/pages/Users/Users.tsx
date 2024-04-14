@@ -1,15 +1,13 @@
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import UserRow from './UserRow';
 import { useUsers } from '../../hooks/useUsers';
 
 import './Users.scss';
-import { User } from '../../types/User';
-import PlusCircle from '../Icons/PlusCircle';
-import EditIcon from '../Icons/EditIcon';
-import DeleteIcon from '../Icons/DeleteIcon';
+import EditIcon from '../../components/Icons/EditIcon';
+import DeleteIcon from '../../components/Icons/DeleteIcon';
 import NewUserForm from './NewUserForm';
+import Loader from '../../components/Loader/Loader';
 
-// todo - handle loading state
 const Users: FC = () => {
   const { users: userList, isLoading, error, invoke: refreshUserList } = useUsers();
 
@@ -22,6 +20,11 @@ const Users: FC = () => {
       )}
       <p>Click the <span className="edit-hint"><EditIcon/>Edit</span> icon to edit a user, or the <span className="delete-hint"><DeleteIcon/>Delete</span> icon to delete a user.</p>
       <table className="users-table">
+        {isLoading && (
+          <div className="loading-overlay">
+            <Loader />
+          </div>
+        )}
         <thead>
           <tr>
             <th>Username</th>

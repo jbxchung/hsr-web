@@ -2,7 +2,7 @@ import { FC, MouseEvent, useCallback, useEffect, useState } from 'react';
 import { User, UserRole } from '../../types/User';
 import { usePostUser } from '../../hooks/useUsers';
 
-import Input from '../Input/Input';
+import Input from '../../components/Input/Input';
 
 interface NewUserFormProps {
   onUserCreated: (user?: User) => void;
