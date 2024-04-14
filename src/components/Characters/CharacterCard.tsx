@@ -21,7 +21,8 @@ const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
           <img className="portrait" src={thumbnail} />
         }
         <div className="icons">
-          <img className="element" src={elementIcons[character.element]} />
+          <img className="path" src={pathIcons[character.path]} title={character.path} />
+          <img className="element" src={elementIcons[character.element]} title={character.element} />
         </div>
       </div>
       <div className="card-title">{character.name}</div>

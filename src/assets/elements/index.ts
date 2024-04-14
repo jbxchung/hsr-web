@@ -1,4 +1,5 @@
 import { Element } from '../../types/Character';
+
 import fire from './fire.webp';
 import ice from './ice.webp';
 import imaginary from './imaginary.webp';
