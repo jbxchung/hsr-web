@@ -15,7 +15,7 @@ export const useCharacters = () => {
 };
 
 export const useThumbnail = (character: Character) => {
-  const { response, isLoading, error, invoke } = useApi<Blob>(`/character/${character.name}/thumbnail`, {
+  const { response, isLoading, error, invoke } = useApi<Blob>(`/character/${character.id}/thumbnail`, {
     cacheResponse: true
   });
 
