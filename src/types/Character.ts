@@ -31,10 +31,3 @@ export enum Element {
   QUANTUM = 'Quantum',
   WIND = 'Wind'
 }
-
-
-
-// export interface UserLoginRequest {
-//   username: string;
-//   password: string;
-// }

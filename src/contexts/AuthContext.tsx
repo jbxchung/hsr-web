@@ -27,6 +27,7 @@ export const AuthContext = createContext<IAuthContext>({
 export const AuthProvider: FC<PropsWithChildren> = ({ children }): ReactElement => {
   const navigate = useNavigate();
 
+  // todo - session cookie should be set by server response with HttpOnly
   const [cachedUser, setCachedUser] = useCookie('user');
   const initialUser = cachedUser ? JSON.parse(cachedUser) : null;
 

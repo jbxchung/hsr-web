@@ -35,7 +35,6 @@ const Navbar: FC = () => {
     }
   }, [handleOutsideClick]);
 
-  // TODO - extract nav dropdown to its own component
   const toggleUserDropdown = useCallback(() => {
     setShowUserDropdown(!showUserDropdown);
   }, [showUserDropdown, setShowUserDropdown]);
