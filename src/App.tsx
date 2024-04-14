@@ -18,11 +18,14 @@ const App: FC = () => {
     <div className="main-content-wrapper">
       <div className="bg" />
       <Routes>
-        {pages.map(pageConfig => (
+        {pages.map(pageConfig => (<>
           <Route key={pageConfig.path} path={pageConfig.path} element={
             <pageConfig.component />
           } />
-        ))}
+          <Route key={`${pageConfig.path}_wildcard`} path={`${pageConfig.path}/*`} element={
+            <pageConfig.component />
+          } />
+        </>))}
         <Route path="/login" element={<LoginPage />} />
         {/* <Route path="*" element={<Navigate to="/login" />} /> */}
       </Routes>
