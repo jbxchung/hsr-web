@@ -1,12 +1,13 @@
-import { FC, useCallback } from 'react';
-import { Character } from '../../types/Character';
+import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { useThumbnail } from '../../hooks/useGameEntities';
+
+import { Character } from '../../types/Character';
+import { GameEntity, GameEntityType } from '../../types/GameEntity';
 
 import elementIcons from '../../assets/elements';
 import pathIcons from '../../assets/paths';
-import { useNavigate } from 'react-router-dom';
-import { LightCone } from '../../types/LightCone';
-import { GameEntity, GameEntityType } from '../../types/GameEntity';
 
 interface GameEntityCardProps {
   entity: GameEntity,

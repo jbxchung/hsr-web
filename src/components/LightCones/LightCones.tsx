@@ -1,16 +1,11 @@
-import { FC, useEffect, useState } from 'react';
-// import { getCharacters } from '../../api/Character';
-import { useAuth } from '../../hooks/useAuth';
-import { UserRole } from '../../types/User';
-import Card from '../Card/Card';
-
-import './LightCones.scss';
-import PlusCircle from '../Icons/PlusCircle';
+import { FC } from 'react';
 import { useGameEntities } from '../../hooks/useGameEntities';
 import { GameEntityType } from '../../types/GameEntity';
+import CardList from '../Card/CardList';
+
+import './LightCones.scss';
 
 const LightCones: FC = () => {
-  const { user } = useAuth();
   const { response: lightCones, isLoading, error, invoke } = useGameEntities(GameEntityType.LIGHT_CONE);
 
   return (
@@ -18,15 +13,7 @@ const LightCones: FC = () => {
       <div className="filter-bar">
         todo: implement filter and search
       </div>
-      <div className="card-list">
-        {user?.role === UserRole.ADMIN && (
-          <div className="card new-entity" onClick={() => alert('todo: open form to add new light cone')}>
-            <PlusCircle />
-          </div>
-        )}
-        {lightCones && Object.values(lightCones).map(lc => <Card key={lc.id} entity={lc} entityType={GameEntityType.LIGHT_CONE} />)}
-          {/* {"id":"testcharacter","name":"test character","rarity":5,"path":"Erudition","element":"Fire","description":"test description"} */}
-      </div>
+      {lightCones && <CardList entities={lightCones} entityType={GameEntityType.LIGHT_CONE} />}
     </div>
   );
 };
