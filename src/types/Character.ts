@@ -1,17 +1,11 @@
-import { GameEntityPath } from "./GameEntity";
+import { GameEntity } from './GameEntity';
 
 export interface CharacterMap {
   [id: string]: Character;
 }
 
-export interface Character {
-  id: string;
-  name: string;
-  rarity: number;
-  path: GameEntityPath;
+export interface Character extends GameEntity {
   element: Element;
-  description: string;
-  thumbnail?: string;
 }
 
 export enum Element {

@@ -2,7 +2,6 @@ import { FC, useEffect, useState } from 'react';
 // import { getCharacters } from '../../api/Character';
 import { useAuth } from '../../hooks/useAuth';
 import { UserRole } from '../../types/User';
-import { useCharacters } from '../../hooks/useCharacters';
 import Card from '../Card/Card';
 
 import './LightCones.scss';

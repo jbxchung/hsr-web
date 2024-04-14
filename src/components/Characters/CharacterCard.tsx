@@ -1,10 +1,11 @@
 import { FC, useCallback } from 'react';
 import { Character } from '../../types/Character';
-import { useThumbnail } from '../../hooks/useCharacters';
+import { useThumbnail } from '../../hooks/useGameEntities';
 
 import elementIcons from '../../assets/elements';
 import pathIcons from '../../assets/paths';
 import { useNavigate } from 'react-router-dom';
+import { GameEntityType } from '../../types/GameEntity';
 
 interface CharacterCardProps {
   character: Character
@@ -12,7 +13,7 @@ interface CharacterCardProps {
 
 const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
   const navigate = useNavigate();
-  const { thumbnail } = useThumbnail(character);
+  const { thumbnail } = useThumbnail(character, GameEntityType.CHARACTER);
 
   return (
     <div className="card" onClick={() => {
