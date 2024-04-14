@@ -35,8 +35,19 @@
                     background: linear-gradient(rgb(156, 109, 105), rgb(206, 166, 106));
                 }
 
-                img {
+                .portrait {
                     width: 100%;
+                }
+
+                .icons {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    height: 2rem;
+
+                    .element, .path {
+                        height: 100%;
+                    }
                 }
             }
 
