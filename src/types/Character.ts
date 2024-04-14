@@ -17,9 +17,9 @@ export enum CharacterPath {
   DESTRUCTION = 'Destruction',
   ERUDITION = 'Erudition',
   HARMONY = 'Harmony',
-  HUNT = 'Hunt',
   NIHILITY = 'Nihility',
-  PRESERVATION = 'Preservation'
+  PRESERVATION = 'Preservation',
+  THE_HUNT = 'The Hunt'
 }
 
 export enum Element {
