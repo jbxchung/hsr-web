@@ -1,18 +1,47 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
+import { Character } from '../../types/Character';
+import { useThumbnail } from '../../hooks/useGameEntities';
 
-interface CardProps {
-  title: string;
-  bg: string;
+import elementIcons from '../../assets/elements';
+import pathIcons from '../../assets/paths';
+import { useNavigate } from 'react-router-dom';
+import { LightCone } from '../../types/LightCone';
+import { GameEntity, GameEntityType } from '../../types/GameEntity';
+
+interface GameEntityCardProps {
+  entity: GameEntity,
+  entityType: GameEntityType
 }
 
-const Card: FC<CardProps> = (props) => {
+const GameEntityCard: FC<GameEntityCardProps> = ({ entity, entityType }) => {
+  const navigate = useNavigate();
+  const { thumbnail } = useThumbnail(entity, entityType);
+
+  let element = null;
+  if (entityType === GameEntityType.CHARACTER) {
+    element = (entity as Character).element;
+  }
 
   return (
-    <div className="card">
-      <h3>{props.title}</h3>
-      <img src={props.bg} />
+    <div className="card" onClick={() => {
+      if (entity) {
+        navigate(entity.id);
+      }
+    }} >
+      <div className={`card-thumbnail rarity-${entity.rarity}`}>
+        {thumbnail &&
+          <img className="portrait" src={thumbnail} />
+        }
+        <div className="icons">
+          <img className="path" src={pathIcons[entity.path]} title={entity.path} />
+          {element &&
+          <img className="element" src={elementIcons[element]} title={element} />
+          }
+        </div>
+      </div>
+      <div className="card-title">{entity.name}</div>
     </div>
   );
 };
 
-export default Card;
+export default GameEntityCard;

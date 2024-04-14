@@ -8,7 +8,6 @@ import './LightCones.scss';
 import PlusCircle from '../Icons/PlusCircle';
 import { useGameEntities } from '../../hooks/useGameEntities';
 import { GameEntityType } from '../../types/GameEntity';
-import LightConeCard from './LightConeCard';
 
 const LightCones: FC = () => {
   const { user } = useAuth();
@@ -25,7 +24,7 @@ const LightCones: FC = () => {
             <PlusCircle />
           </div>
         )}
-        {lightCones && Object.values(lightCones).map(lc => <LightConeCard key={lc.id} lightCone={lc} />)}
+        {lightCones && Object.values(lightCones).map(lc => <Card key={lc.id} entity={lc} entityType={GameEntityType.LIGHT_CONE} />)}
           {/* {"id":"testcharacter","name":"test character","rarity":5,"path":"Erudition","element":"Fire","description":"test description"} */}
       </div>
     </div>
