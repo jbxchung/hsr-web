@@ -1,21 +1,25 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { Character } from '../../types/Character';
 import { useThumbnail } from '../../hooks/useCharacters';
 
 import elementIcons from '../../assets/elements';
 import pathIcons from '../../assets/paths';
+import { useNavigate } from 'react-router-dom';
 
 interface CharacterCardProps {
   character: Character
 }
 
 const CharacterCard: FC<CharacterCardProps> = ({ character }) => {
-  console.log(character);
-
+  const navigate = useNavigate();
   const { thumbnail } = useThumbnail(character);
 
   return (
-    <div className="card">
+    <div className="card" onClick={() => {
+      if (character) {
+        navigate(character.id);
+      }
+    }} >
       <div className={`card-thumbnail rarity-${character.rarity}`}>
         {thumbnail &&
           <img className="portrait" src={thumbnail} />

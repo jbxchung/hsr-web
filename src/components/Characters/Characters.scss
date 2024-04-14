@@ -27,6 +27,22 @@
             background-color: $card-background-color;
             border-radius: 1rem;
             overflow: hidden;
+            cursor: pointer;
+
+            &:hover {
+                background-color: $card-background-color-hover;
+                fill: #ccc;
+            }
+
+            &.new-character {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                svg {
+                    width: 50%;
+                }
+            }
 
             .card-thumbnail {
                 position: relative;

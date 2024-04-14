@@ -7,12 +7,15 @@ const BASE_URL = getApiBaseUrl();
 
 interface UseApiOptions extends RequestInit {
   callOnInit?: boolean;
+  cacheResponse?: boolean;
 }
 
 const UseApiDefaultOptions: UseApiOptions = {
   callOnInit: true,
+  cacheResponse: false,
 };
 
+const apiResponseCache: any = {};
 // expects JSON response
 export const useApi = <T>(url: string | URL | Request, options?: UseApiOptions | undefined ) => {
   const fetchOptions: UseApiOptions = {
@@ -27,36 +30,50 @@ export const useApi = <T>(url: string | URL | Request, options?: UseApiOptions |
   const fetchData = async (requestBody?: any) => {
     setIsLoading(true);
 
-    try {
-      if (requestBody) {
-        fetchOptions.body = JSON.stringify(requestBody);
-      }
+    const cachedResponse = apiResponseCache[url.toString()];
 
-      const response = await fetch(`${BASE_URL}${url}`, fetchOptions);
-
-      let data: ApiResponse<T> = {
-        status: false,
-        payload: null
-      };
-      const contentType = response.headers.get('Content-Type');
-      if (contentType === 'image/webp') {
-        data = {
-          status: true,
-          payload: await response.blob() as T
+    // todo - need to cache per specific request, not just url
+    if (fetchOptions.cacheResponse && cachedResponse) {
+      setData(cachedResponse);
+      setError(null);
+    } else {
+      try {
+        if (requestBody) {
+          fetchOptions.body = JSON.stringify(requestBody);
+        }
+  
+        const response = await fetch(`${BASE_URL}${url}`, fetchOptions);
+  
+        let data: ApiResponse<T> = {
+          status: false,
+          payload: null
         };
-      } else if (contentType === 'application/json') {
-        data = await response.json();
-      } else {
-        setError(`Unrecognized MIME type from API response to ${url}`);
+        const contentType = response.headers.get('Content-Type');
+        if (contentType === 'image/webp') {
+          data = {
+            status: true,
+            payload: await response.blob() as T
+          };
+        } else if (contentType === 'application/json') {
+          data = await response.json();
+        } else {
+          setError(`Unrecognized MIME type from API response to ${url}`);
+        }
+        
+        if (data.status) {
+          setData(data.payload);
+          setError(null);
+  
+          if (fetchOptions.cacheResponse) {
+            // todo - need to cache per specific request, not just url
+            apiResponseCache[url.toString()] = data.payload;
+          }
+        } else {
+          setError(data.payload);
+        }
+      } catch (error) {
+        setError(error);
       }
-      
-      if (data.status) {
-        setData(data.payload);
-      } else {
-        setError(data.payload);
-      }
-    } catch (error) {
-      setError(error);
     }
 
     setIsLoading(false);
