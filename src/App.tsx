@@ -19,10 +19,9 @@ const App: FC = () => {
       <div className="bg" />
       <Routes>
         {pages.map(pageConfig => (
-          
-            <Route key={pageConfig.path} path={pageConfig.path} element={
-              <pageConfig.component />
-            } />
+          <Route key={pageConfig.path} path={pageConfig.path} element={
+            <pageConfig.component />
+          } />
         ))}
         <Route path="/login" element={<LoginPage />} />
         {/* <Route path="*" element={<Navigate to="/login" />} /> */}
