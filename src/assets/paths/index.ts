@@ -1,4 +1,4 @@
-import { CharacterPath } from '../../types/Character';
+import { GameEntityPath } from '../../types/GameEntity';
 
 import abundance from './abundance.webp';
 import destruction from './destruction.webp';
@@ -9,11 +9,11 @@ import preservation from './preservation.webp';
 import theHunt from './the hunt.webp';
 
 export default {
-  [CharacterPath.ABUNDANCE]: abundance,
-  [CharacterPath.DESTRUCTION]: destruction,
-  [CharacterPath.ERUDITION]: erudition,
-  [CharacterPath.HARMONY]: harmony,
-  [CharacterPath.NIHILITY]: nihility,
-  [CharacterPath.PRESERVATION]: preservation,
-  [CharacterPath.THE_HUNT]: theHunt,
+  [GameEntityPath.ABUNDANCE]: abundance,
+  [GameEntityPath.DESTRUCTION]: destruction,
+  [GameEntityPath.ERUDITION]: erudition,
+  [GameEntityPath.HARMONY]: harmony,
+  [GameEntityPath.NIHILITY]: nihility,
+  [GameEntityPath.PRESERVATION]: preservation,
+  [GameEntityPath.THE_HUNT]: theHunt,
 };
