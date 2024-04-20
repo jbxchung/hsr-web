@@ -1,5 +1,5 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useAuth } from '../../hooks/useAuth';
 import { LoginPage, getRoleBasedPages } from '../../pages';
@@ -17,6 +17,7 @@ const Navbar: FC = () => {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   const pages = getRoleBasedPages(user);
 
@@ -42,7 +43,7 @@ const Navbar: FC = () => {
   return (
     <div className="navbar">
       <div className="navbar-left">
-        <img src={logo} alt="logo" className="home-logo" onClick={() => window.location.href = '/'} />
+        <img src={logo} alt="logo" className="home-logo" onClick={() => navigate('/')} />
       </div>
       <div ref={linkAreaRef} className="navbar-content">
         <span className="navbar-menu-icon" onClick={() => setShowNavMenu(!showNavMenu)}>
@@ -50,7 +51,7 @@ const Navbar: FC = () => {
         </span>
         <div className={`navbar-links${showNavMenu ? ' open' : ''}`}>
           {
-            pages.map(({ path, title }) => (
+            pages.filter(page => page.showInNavbar).map(({ path, title }) => (
               <NavbarLink
                 key={path}
                 active={path === '/' ? location.pathname === '/' : location.pathname.startsWith(path)}
@@ -69,7 +70,7 @@ const Navbar: FC = () => {
                 </span>
                 {showUserDropdown &&
                   <div className="navbar-link-dropdown">
-                    <span className="dropdown-option">Friends</span>
+                    <span className="dropdown-option" onClick={() => navigate('/friends')}>Friends</span>
                     <span className="dropdown-option" onClick={logout}>Logout</span>
                   </div>
                 }
