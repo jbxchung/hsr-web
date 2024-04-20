@@ -5,6 +5,7 @@ export interface Friendship {
 }
 
 export enum FriendshipStatus {
-    REQUESTED = 'REQUESTED',
     ACCEPTED = 'ACCEPTED',
+    REJECTED = 'REJECTED',
+    REQUESTED = 'REQUESTED',
 }

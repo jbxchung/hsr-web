@@ -1,13 +1,17 @@
 import { FC, useEffect, useState } from 'react';
+
+import Loader from '../../components/Loader/Loader';
+
 import { useAuth } from '../../hooks/useAuth';
 import { useFriends } from '../../hooks/useFriends';
 import { Friendship, FriendshipStatus } from '../../types/Friendship';
 
+import './Friends.scss';
+import FriendRow from './FriendRow';
+
 const Friends: FC = () => {
   const { user } = useAuth();
-
-  const { friends } = useFriends();
-  console.log(friends);
+  const { friends, isLoading } = useFriends();
 
   const [sentRequests, setSentRequests] = useState<Array<Friendship>>([]);
   const [receivedRequests, setReceivedRequests] = useState<Array<Friendship>>([]);
@@ -39,13 +43,20 @@ const Friends: FC = () => {
   return (
     <div className="friends-page">
       Placeholder friends management for {user?.username}
+      <p>todo: add friend search</p>
       <div className="friends-list">
-        <p>sent requests</p>
-        {sentRequests.map(f => JSON.stringify(f))}
-        <p>receivced requests</p>
-        {receivedRequests.map(f => JSON.stringify(f))}
-        <p>friends</p>
-        {friendList.map(f => JSON.stringify(f))}
+        {isLoading && (
+          <div className="loading-overlay">
+            <Loader />
+          </div>
+        )}
+        <table className="friends-table">
+          <tbody>
+            {sentRequests.map(f => <FriendRow currentUser={user} friendship={f} />)}
+            {receivedRequests.map(f => <FriendRow currentUser={user} friendship={f} />)}
+            {friendList.map(f => <FriendRow currentUser={user} friendship={f} />)}
+          </tbody>
+        </table>
       </div>
     </div>
   );

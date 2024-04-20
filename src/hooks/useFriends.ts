@@ -30,3 +30,15 @@ export const useFriendAccept = (sender: string) => {
   
   return { friendship, isLoading, error, invoke };
 };
+
+export const useFriendReject = (sender: string) => {
+  const { response: friendship, isLoading, error, invoke } = useApiAuth<Friendship>(`/friends/reject/${sender}`, {
+    callOnInit: false,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  
+  return { friendship, isLoading, error, invoke };
+};

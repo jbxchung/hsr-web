@@ -1,6 +1,6 @@
 @import '../../styles/variables.scss';
 
-.users {
+.friends-page {
     p {
         .edit-hint {
             color: $button-secondary-background-color;
@@ -17,7 +17,7 @@
         }
     }
 
-    .users-table {
+    .friends-table {
         position: relative;
         width: 100%;
         text-align: left;
