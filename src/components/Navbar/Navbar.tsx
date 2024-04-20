@@ -62,14 +62,15 @@ const Navbar: FC = () => {
           }
           <div className="navbar-right">
             {user ?
-              <div className={`navbar-link`} onClick={toggleUserDropdown}>
+              <div className={`navbar-link no-hover`} onClick={toggleUserDropdown}>
                 <span className="user-profile-nav">
                   <img src={defaultProfilePicture} alt="profile picture" className="profile-icon" />
                   {user.username}
                 </span>
                 {showUserDropdown &&
                   <div className="navbar-link-dropdown">
-                    <span className="logout-button" onClick={logout}>Logout</span>
+                    <span className="dropdown-option">Friends</span>
+                    <span className="dropdown-option" onClick={logout}>Logout</span>
                   </div>
                 }
               </div>
