@@ -7,8 +7,20 @@ export const useFriends = () => {
   return { friends, isLoading, error, invoke };
 };
 
-export const useFriendCancel = (receiver: string) => {
-  const { response: friendship, isLoading, error, invoke } = useApiAuth<Friendship>(`/friends/cancel/${receiver}`, {
+export const useFriendRequest = () => {
+  const { response: friendship, isLoading, error, invoke } = useApiAuth<Friendship>(`/friends/request`, {
+    callOnInit: false,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  
+  return { friendship, isLoading, error, invoke };
+};
+
+export const useFriendCancel = () => {
+  const { response: friendship, isLoading, error, invoke } = useApiAuth<Friendship>(`/friends/cancel`, {
     callOnInit: false,
     method: 'POST',
     headers: {
@@ -19,8 +31,8 @@ export const useFriendCancel = (receiver: string) => {
   return { friendship, isLoading, error, invoke };
 }
 
-export const useFriendRequest = (receiver: string) => {
-  const { response: friendship, isLoading, error, invoke } = useApiAuth<Friendship>(`/friends/request/${receiver}`, {
+export const useFriendAccept = () => {
+  const { response: friendship, isLoading, error, invoke } = useApiAuth<Friendship>(`/friends/accept`, {
     callOnInit: false,
     method: 'POST',
     headers: {
@@ -31,20 +43,8 @@ export const useFriendRequest = (receiver: string) => {
   return { friendship, isLoading, error, invoke };
 };
 
-export const useFriendAccept = (sender: string) => {
-  const { response: friendship, isLoading, error, invoke } = useApiAuth<Friendship>(`/friends/accept/${sender}`, {
-    callOnInit: false,
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
-  
-  return { friendship, isLoading, error, invoke };
-};
-
-export const useFriendReject = (sender: string) => {
-  const { response: friendship, isLoading, error, invoke } = useApiAuth<Friendship>(`/friends/reject/${sender}`, {
+export const useFriendReject = () => {
+  const { response: friendship, isLoading, error, invoke } = useApiAuth<Friendship>(`/friends/reject`, {
     callOnInit: false,
     method: 'POST',
     headers: {

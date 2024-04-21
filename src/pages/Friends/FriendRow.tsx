@@ -22,9 +22,9 @@ const FriendRow: FC<FriendRowProps> = ({ currentUser, friendship }) => {
   const [canReject, setCanReject] = useState<boolean>(false);
   const [canRemove, setCanRemove] = useState<boolean>(false);
 
-  const { friendship: cancelledFriend } = useFriendCancel(friendship.sender);
-  const { friendship: acceptedFriend } = useFriendAccept(friendship.sender);
-  const { friendship: rejectedFriend } = useFriendReject(friendship.sender);
+  const { friendship: cancelledFriend, invoke: cancelFriendRequest } = useFriendCancel();
+  const { friendship: acceptedFriend, invoke: acceptFriendRequest } = useFriendAccept();
+  const { friendship: rejectedFriend, invoke: rejectFriendRequest } = useFriendReject();
 
   useEffect(() => {
     if (currentUser && friendship) {
@@ -32,6 +32,7 @@ const FriendRow: FC<FriendRowProps> = ({ currentUser, friendship }) => {
         // already friends, can remove
         setCanRemove(true);
         setStatusText('Friends');
+        setDisplayName((friendship.sender === currentUser.username) ? friendship.receiver: friendship.sender);
       } else if (friendship.sender === currentUser.username) {
         // we sent this request, display the receiver's name
         setDisplayName(friendship.receiver);
@@ -67,6 +68,15 @@ const FriendRow: FC<FriendRowProps> = ({ currentUser, friendship }) => {
             onClick={() => alert('todo: cancel')}
           >
             <CancelIcon />
+          </span>
+        }
+        {canRemove &&
+          <span
+            className="action-icon remove"
+            title="Remove"
+            onClick={() => alert('todo: Remove')}
+          >
+            <DeleteIcon />
           </span>
         }
         {canAccept &&
