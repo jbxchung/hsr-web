@@ -27,6 +27,11 @@ const FriendRow: FC<FriendRowProps> = ({ currentUser, friendship }) => {
   const { friendship: rejectedFriend, invoke: rejectFriendRequest } = useFriendReject();
 
   useEffect(() => {
+    setCanCancel(false);
+    setStatusText('Cancelled');
+  }, [cancelledFriend]);
+
+  useEffect(() => {
     if (currentUser && friendship) {
       if (friendship.status === FriendshipStatus.ACCEPTED) {
         // already friends, can remove
@@ -65,7 +70,7 @@ const FriendRow: FC<FriendRowProps> = ({ currentUser, friendship }) => {
           <span
             className="action-icon cancel"
             title="Cancel"
-            onClick={() => alert('todo: cancel')}
+            onClick={() => cancelFriendRequest({ user: displayName })}
           >
             <CancelIcon />
           </span>
@@ -74,7 +79,7 @@ const FriendRow: FC<FriendRowProps> = ({ currentUser, friendship }) => {
           <span
             className="action-icon remove"
             title="Remove"
-            onClick={() => alert('todo: Remove')}
+            onClick={() => alert('todo: Allow removing friends via UI')}
           >
             <DeleteIcon />
           </span>
@@ -83,7 +88,7 @@ const FriendRow: FC<FriendRowProps> = ({ currentUser, friendship }) => {
           <span
             className="action-icon accept"
             title="Accept"
-            onClick={() => alert('todo: accept')}
+            onClick={() => acceptFriendRequest({ user: displayName })}
           >
             <CheckCircle />
           </span>
@@ -92,7 +97,7 @@ const FriendRow: FC<FriendRowProps> = ({ currentUser, friendship }) => {
           <span
             className="action-icon reject"
             title="Reject"
-            onClick={() => alert('todo: Reject')}
+            onClick={() => rejectFriendRequest({ user: displayName })}
           >
             <CancelIcon />
           </span>
