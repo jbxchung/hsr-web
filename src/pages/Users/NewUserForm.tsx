@@ -47,7 +47,7 @@ const NewUserForm: FC<NewUserFormProps> = (props: NewUserFormProps) => {
   }, [errorCreatingUser]);
 
   return (
-    <div className="new-user-modal form">
+    <div className="new-user modal form">
       <h1>New User</h1>
       <Input
         required={true}

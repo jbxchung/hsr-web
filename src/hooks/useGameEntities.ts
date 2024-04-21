@@ -28,7 +28,7 @@ export const useThumbnail = (entity: GameEntity, entityType: GameEntityType) => 
 }
 
 export const usePostGameEntity = (entityType: GameEntityType) => {
-  const { response: user, isLoading, error, invoke } = useApiAuth<GameEntity>(`/${entityType}/`, {
+  const { response: gameEntity, isLoading, error, invoke } = useApiAuth<GameEntity>(`/${entityType}/`, {
     callOnInit: false,
     method: 'POST',
     headers: {
@@ -36,7 +36,7 @@ export const usePostGameEntity = (entityType: GameEntityType) => {
     }
   });
   
-  return { user, isLoading, error, invoke };
+  return { gameEntity, isLoading, error, invoke };
 };
 
 // export const usePutUser = (username: string) => {

@@ -74,9 +74,9 @@ const Friends: FC = () => {
         )}
         <table className="friends-table">
           <tbody>
-            {sentRequests.map(f => <FriendRow currentUser={user} friendship={f} />)}
-            {receivedRequests.map(f => <FriendRow currentUser={user} friendship={f} />)}
-            {friendList.map(f => <FriendRow currentUser={user} friendship={f} />)}
+            {sentRequests.map(f => <FriendRow key={JSON.stringify(f)} currentUser={user} friendship={f} />)}
+            {receivedRequests.map(f => <FriendRow key={JSON.stringify(f)} currentUser={user} friendship={f} />)}
+            {friendList.map(f => <FriendRow key={JSON.stringify(f)} currentUser={user} friendship={f} />)}
           </tbody>
         </table>
       </div>

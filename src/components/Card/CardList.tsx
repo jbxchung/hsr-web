@@ -12,15 +12,16 @@ import './Card.scss';
 interface CardListProps {
   entities: Array<GameEntity>;
   entityType: GameEntityType;
+  createNew?: Function;
 }
 
-const CardList: FC<CardListProps> = ({ entities, entityType }) => {
+const CardList: FC<CardListProps> = ({ entities, entityType, createNew }) => {
   const { user } = useAuth();
 
   return (
     <div className="card-list">
       {user?.role === UserRole.ADMIN && (
-        <div className="card new-entity" onClick={() => alert(`todo: open form to add new ${entityType}`)}>
+        <div className="card new-entity" onClick={() => createNew && createNew()}>
           <PlusCircle />
         </div>
       )}
