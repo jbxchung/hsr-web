@@ -36,83 +36,44 @@
             background-color: #5f5f5f;
         }
 
-        .user-row {
-            // cursor: pointer;
-            input {
-                width: 100%;
-                color: inherit;
-                background: none;
-                outline: none;
-                border: none;
-                border-bottom: 1px solid $form-border-color;
-                box-sizing: border-box;
+        .friend-row {
+            .action-icons {
+                display: flex;
+                align-items: center;
+                justify-content: center;
 
-                &:disabled {
-                    border-bottom: none;
-                    cursor: text;
-                }
-            }
+                .action-icon {
+                    text-align: center;
+                    cursor: pointer;
 
-            select {
-                background: none;
-                color: inherit;
-
-                &:disabled {
-                    border: none;
-                    opacity: unset;
-                    appearance: none;
-                    white-space: nowrap;
-                }
-
-                option {
-                    background: none;
-                    color: inherit;
-                }
-            }
-
-            .action-icon {
-                display: block;
-                width: 100%;
-                text-align: center;
-                cursor: pointer;
-
-                svg {
-                    height: 1.5rem;
-                    width: 1.5rem;
-                }
-
-                &.disabled {
-                    fill: $icon-disabled-fill-color !important;
-                    cursor: not-allowed;
-                }
-
-                &.edit {
-                    &:hover {
-                        fill: $button-secondary-background-color;
+                    svg {
+                        height: 1.5rem;
+                        width: 1.5rem;
                     }
-                    
-                    &:active {
-                        fill: $button-secondary-background-color-active;
-                    }
-                }
 
-                &.save {
-                    &:hover {
-                        fill: $button-tertiary-background-color;
+                    &.disabled {
+                        fill: $icon-disabled-fill-color !important;
+                        cursor: not-allowed;
                     }
-                    
-                    &:active {
-                        fill: $button-tertiary-background-color-active;
-                    }
-                }
 
-                &.delete {
-                    &:hover {
-                        fill: $button-danger-background-color;
+                    &.accept {
+                        &:hover {
+                            fill: $button-primary-background-color;
+                        }
+                        
+                        &:active {
+                            fill: $button-primary-background-color-active;
+                        }
                     }
-                    
-                    &:active {
-                        fill: $button-danger-background-color-active;
+
+                    &.cancel, &.reject {
+                        &:hover {
+                            fill: $button-danger-background-color;
+                        }
+                        
+                        &:active {
+                            fill: $button-danger-background-color-active;
+                        }
                     }
                 }
             }

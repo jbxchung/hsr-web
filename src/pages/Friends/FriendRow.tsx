@@ -1,11 +1,13 @@
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { User, UserRole } from '../../types/User';
 import { useAuth } from '../../hooks/useAuth';
-import EditIcon from '../../components/Icons/EditIcon';
-import DeleteIcon from '../../components/Icons/DeleteIcon';
-import SaveIcon from '../../components/Icons/SaveIcon';
+import EditIcon from '../../components/Icons/Edit';
+import DeleteIcon from '../../components/Icons/Delete';
+import SaveIcon from '../../components/Icons/Save';
 import { Friendship, FriendshipStatus } from '../../types/Friendship';
-import { useFriendAccept, useFriendReject } from '../../hooks/useFriends';
+import { useFriendAccept, useFriendCancel, useFriendReject } from '../../hooks/useFriends';
+import CancelIcon from '../../components/Icons/Cancel';
+import CheckCircle from '../../components/Icons/CheckCircle';
 
 interface FriendRowProps {
   currentUser: User | null;
@@ -20,6 +22,7 @@ const FriendRow: FC<FriendRowProps> = ({ currentUser, friendship }) => {
   const [canReject, setCanReject] = useState<boolean>(false);
   const [canRemove, setCanRemove] = useState<boolean>(false);
 
+  const { friendship: cancelledFriend } = useFriendCancel(friendship.sender);
   const { friendship: acceptedFriend } = useFriendAccept(friendship.sender);
   const { friendship: rejectedFriend } = useFriendReject(friendship.sender);
 
@@ -56,24 +59,35 @@ const FriendRow: FC<FriendRowProps> = ({ currentUser, friendship }) => {
         {statusText}
       </td>
       <td>
+        <div className="action-icons">
         {canCancel &&
-          'todo: cancel button'
+          <span
+            className="action-icon cancel"
+            title="Cancel"
+            onClick={() => alert('todo: cancel')}
+          >
+            <CancelIcon />
+          </span>
         }
         {canAccept &&
-          'todo: accept button'
+          <span
+            className="action-icon accept"
+            title="Accept"
+            onClick={() => alert('todo: accept')}
+          >
+            <CheckCircle />
+          </span>
         }
         {canReject &&
-          'todo: reject button'
+          <span
+            className="action-icon reject"
+            title="Reject"
+            onClick={() => alert('todo: Reject')}
+          >
+            <CancelIcon />
+          </span>
         }
-      </td>
-      <td>
-        {/* <span
-          className="action-icon edit"
-          title="Edit"
-          onClick={() => console.log('todo: edit')}
-        >
-          <EditIcon />
-        </span> */}
+        </div>
       </td>
     </tr>
   );

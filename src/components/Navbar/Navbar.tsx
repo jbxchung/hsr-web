@@ -5,7 +5,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { LoginPage, getRoleBasedPages } from '../../pages';
 
 import NavbarLink from './NavbarLink';
-import MenuIcon from '../Icons/MenuIcon';
+import MenuIcon from '../Icons/Menu';
 
 import logo from '../../assets/astral-express-logo.png';
 import defaultProfilePicture from '../../assets/default-pfp.png';
