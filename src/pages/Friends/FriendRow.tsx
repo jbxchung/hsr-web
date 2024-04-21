@@ -14,6 +14,7 @@ interface FriendRowProps {
   friendship: Friendship;
 }
 
+// TODO - just display stuff, leave all this login in Friends.tsx
 const FriendRow: FC<FriendRowProps> = ({ currentUser, friendship }) => {
   const [displayName, setDisplayName] = useState<string>('');
   const [statusText, setStatusText] = useState<string>('');
@@ -27,9 +28,20 @@ const FriendRow: FC<FriendRowProps> = ({ currentUser, friendship }) => {
   const { friendship: rejectedFriend, invoke: rejectFriendRequest } = useFriendReject();
 
   useEffect(() => {
-    setCanCancel(false);
-    setStatusText('Cancelled');
+    if (cancelledFriend) {
+      setCanCancel(false);
+      setStatusText('Cancelled');
+    }
   }, [cancelledFriend]);
+
+  useEffect(() => {
+    if (acceptedFriend) {
+      setCanReject(false);
+      setCanRemove(true);
+      setCanAccept(false);
+      setStatusText('Friends');
+    }
+  }, [acceptedFriend]);
 
   useEffect(() => {
     if (currentUser && friendship) {
