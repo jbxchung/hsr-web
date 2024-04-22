@@ -1,0 +1,98 @@
+@import '../../styles/variables.scss';
+
+.friends-page {
+    p {
+        .edit-hint {
+            color: $button-secondary-background-color;
+            fill: $button-secondary-background-color;
+        }
+
+        .delete-hint {
+            color: $button-danger-background-color;
+            fill: $button-danger-background-color;
+        }
+
+        svg {
+            height: 1rem;
+        }
+    }
+
+    .new-friend-request {
+        display: flex;
+        margin-bottom: 1rem;
+        color: $form-text-color;
+
+        .hsr-input {
+            flex: 1;
+            margin-right: 0.5rem;
+        }
+    }
+
+    .friends-table {
+        position: relative;
+        width: 100%;
+        text-align: left;
+        border: 1px solid white;
+        border-collapse: collapse;
+
+        tr, th, td {
+            border: 1px solid white;
+        }
+        
+        th, td {
+            padding: 1rem;
+        }
+
+        thead {
+            background-color: #5f5f5f;
+        }
+
+        .friend-row {
+            .action-icons {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                .action-icon {
+                    text-align: center;
+                    cursor: pointer;
+
+                    svg {
+                        height: 1.5rem;
+                        width: 1.5rem;
+                    }
+
+                    &.disabled {
+                        fill: $icon-disabled-fill-color !important;
+                        cursor: not-allowed;
+                    }
+
+                    &.accept {
+                        &:hover {
+                            fill: $button-primary-background-color;
+                        }
+                        
+                        &:active {
+                            fill: $button-primary-background-color-active;
+                        }
+                    }
+
+                    &.cancel, &.reject, &.remove {
+                        &:hover {
+                            fill: $button-danger-background-color;
+                        }
+                        
+                        &:active {
+                            fill: $button-danger-background-color-active;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    .new-user-button {
+        margin-top: 1rem;
+        white-space: nowrap;
+    }
+}

@@ -71,6 +71,11 @@
           color: $navbar-link-hover-text-color;
           background: $navbar-link-hover-background-color;
         }
+
+        &.no-hover {
+          color: inherit;
+          background: inherit;
+        }
       }
 
       .navbar-right {
@@ -80,9 +85,16 @@
         justify-content: flex-end;
 
         .user-profile-nav {
+          flex: 1;
+          height: 100%;
           padding: 0 1rem;
           display: flex;
           align-items: center;
+          
+          &:hover {
+            color: $navbar-link-hover-text-color;
+            background: $navbar-link-hover-background-color;
+          }
 
           .profile-icon {
             height: 2rem;
@@ -95,14 +107,18 @@
           top: 100%;
           left: 0;
           right: 0;
-          height: 2rem;
           background: $navbar-background-color;
           
-          .logout-button {
+          .dropdown-option {
             height: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
+
+            &:hover {
+              color: $navbar-link-hover-text-color;
+              background: $navbar-link-hover-background-color;
+            }
           }
         }
       }

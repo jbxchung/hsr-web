@@ -3,8 +3,8 @@ import UserRow from './UserRow';
 import { useUsers } from '../../hooks/useUsers';
 
 import './Users.scss';
-import EditIcon from '../../components/Icons/EditIcon';
-import DeleteIcon from '../../components/Icons/DeleteIcon';
+import EditIcon from '../../components/Icons/Edit';
+import DeleteIcon from '../../components/Icons/Delete';
 import NewUserForm from './NewUserForm';
 import Loader from '../../components/Loader/Loader';
 
