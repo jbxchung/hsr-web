@@ -24,9 +24,10 @@ const Friends: FC = () => {
   const { user } = useAuth();
   const { friends, isLoading } = friendsApi.useFriends();
   const { friendship: newFriendRequest, invoke: sendFriendRequest } = friendsApi.useFriendRequest();
-  const { friendship: acceptedFriend, invoke: acceptFriendRequest } = friendsApi.useFriendAccept();
-  const { friendship: cancelledFriend, invoke: cancelFriendRequest } = friendsApi.useFriendCancel();
-  const { friendship: rejectedFriend, invoke: rejectFriendRequest } = friendsApi.useFriendReject();
+  const { friendship: acceptedFriendRequest, invoke: acceptFriendRequest } = friendsApi.useFriendAccept();
+  const { friendship: cancelledFriendRequest, invoke: cancelFriendRequest } = friendsApi.useFriendCancel();
+  const { friendship: rejectedFriendRequest, invoke: rejectFriendRequest } = friendsApi.useFriendReject();
+  const { friendship: deletedFriendRequest, invoke: deleteFriendRequest } = friendsApi.useFriendDelete();
 
   const [sentRequests, setSentRequests] = useState<Array<Friendship>>([]);
   const [receivedRequests, setReceivedRequests] = useState<Array<Friendship>>([]);
@@ -42,23 +43,46 @@ const Friends: FC = () => {
     }
   }, [newFriendRequest]);
 
+  // update accepted request
+  useEffect(() => {
+    if (acceptedFriendRequest) {
+      const received = [...receivedRequests];
+      const accepted = received.splice(received.findIndex(f => f.sender === acceptedFriendRequest.sender), 1);
+      setReceivedRequests(received);
+      setFriendList([...friendList, ...accepted ]);
+    }
+  }, [acceptedFriendRequest]);
+
   // remove cancelled request
   useEffect(() => {
-    if (cancelledFriend) {
+    if (cancelledFriendRequest) {
       const sent = [...sentRequests];
-      sent.splice(sent.findIndex(f => f.receiver === cancelledFriend.receiver), 1);
+      sent.splice(sent.findIndex(f => f.receiver === cancelledFriendRequest.receiver), 1);
       setSentRequests(sent);
     }
-  }, [cancelledFriend]);
+  }, [cancelledFriendRequest]);
 
   // remove rejected request
   useEffect(() => {
-    if (rejectedFriend) {
+    if (rejectedFriendRequest) {
       const received = [...receivedRequests];
-      received.splice(received.findIndex(f => f.sender === rejectedFriend.sender), 1);
+      received.splice(received.findIndex(f => f.sender === rejectedFriendRequest.sender), 1);
       setReceivedRequests(received);
     }
-  }, [rejectedFriend]);
+  }, [rejectedFriendRequest]);
+
+  // remove deleted friend
+  useEffect(() => {
+    if (deletedFriendRequest) {
+      const friends = [...friendList];
+      if (deletedFriendRequest.sender === user?.username) {
+        friends.splice(friends.findIndex(f => f.sender === deletedFriendRequest.sender), 1);
+      } else {
+        friends.splice(friends.findIndex(f => f.receiver === deletedFriendRequest.receiver), 1);
+      }
+      setFriendList(friends);
+    }
+  }, [deletedFriendRequest]);
 
   // when we get the friends list, split it by sent/received/confirmed to display in that order
   useEffect(() => {
@@ -119,7 +143,7 @@ const Friends: FC = () => {
                 statusText="Friend request received"
                 actions={[
                   { action: FriendAction.ACCEPT, call: acceptFriendRequest, icon: CheckCircle },
-                  { action: FriendAction.REJECT, call: rejectFriendRequest, icon: DeleteIcon },
+                  { action: FriendAction.REJECT, call: rejectFriendRequest, icon: CancelIcon },
                 ]}
               />
             ))}
@@ -127,7 +151,7 @@ const Friends: FC = () => {
               <FriendRow
                 displayName={(f.sender === user?.username) ? f.receiver: f.sender}
                 statusText="Friend request accepted"
-                actions={[{ action: FriendAction.DELETE, call: cancelFriendRequest, icon: CancelIcon }]}
+                actions={[{ action: FriendAction.DELETE, call: deleteFriendRequest, icon: DeleteIcon }]}
               />
             ))}
           </tbody>

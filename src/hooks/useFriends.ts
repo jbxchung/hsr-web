@@ -54,3 +54,15 @@ export const useFriendReject = () => {
   
   return { friendship, isLoading, error, invoke };
 };
+
+export const useFriendDelete = () => {
+  const { response: friendship, isLoading, error, invoke } = useApiAuth<Friendship>(`/friends/delete`, {
+    callOnInit: false,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+  
+  return { friendship, isLoading, error, invoke };
+};
