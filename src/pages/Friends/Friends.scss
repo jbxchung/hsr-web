@@ -17,6 +17,17 @@
         }
     }
 
+    .new-friend-request {
+        display: flex;
+        margin-bottom: 1rem;
+        color: $form-text-color;
+
+        .hsr-input {
+            flex: 1;
+            margin-right: 0.5rem;
+        }
+    }
+
     .friends-table {
         position: relative;
         width: 100%;

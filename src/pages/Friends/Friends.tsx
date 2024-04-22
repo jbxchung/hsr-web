@@ -12,6 +12,7 @@ import PlusCircle from '../../components/Icons/PlusCircle';
 import CancelIcon from '../../components/Icons/Cancel';
 import CheckCircle from '../../components/Icons/CheckCircle';
 import DeleteIcon from '../../components/Icons/Delete';
+import Input from '../../components/Input/Input';
 
 export enum FriendAction {
   ACCEPT = 'Accept',
@@ -115,13 +116,20 @@ const Friends: FC = () => {
 
   return (
     <div className="friends-page">
-      Placeholder friends management for {user?.username}
       <p>todo: add friend search</p>
-      <input className="add-friend-input" value={addFriendName} onChange={(e) => setAddFriendName(e.target.value)} />
-      <button className="primary" onClick={requestFriend} >
-        Send Request
-        <PlusCircle />
-      </button>
+      <div className="new-friend-request">
+        <Input
+          required={false}
+          className="form-field"
+          placeholder="Add Friend"
+          value={addFriendName}
+          onChange={(e) => setAddFriendName(e.target.value)}
+        />
+        <button className="primary" onClick={requestFriend} >
+          Send Request
+          <PlusCircle />
+        </button>
+      </div>
       <div className="friends-list">
         {isLoading && (
           <div className="loading-overlay">
