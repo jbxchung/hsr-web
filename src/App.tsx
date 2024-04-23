@@ -16,7 +16,6 @@ const App: FC = () => {
   return (<>
     <Navbar />
     <div className="main-content-wrapper">
-      <div className="bg" />
       <Routes>
         {pages.map(pageConfig => (<>
           <Route key={pageConfig.path} path={pageConfig.path} element={
