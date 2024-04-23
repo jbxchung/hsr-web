@@ -36,11 +36,11 @@
             overflow: hidden;
 
             &.rarity-5 {
-                background: linear-gradient(rgb(156, 109, 105), rgb(206, 166, 106));
+                background: linear-gradient(rgb(156, 109, 105, 0.8), rgb(206, 166, 106, 0.8));
             }
 
             &.rarity-4 {
-                background: linear-gradient(rgb(96, 94, 128), rgb(136, 89, 202));
+                background: linear-gradient(rgb(96, 94, 128, 0.8), rgb(136, 89, 202, 0.8));
             }
 
             .portrait {
@@ -66,8 +66,14 @@
         .card-title {
             display: flex;
             align-items: center;
-            padding-left: 0.5rem;
+            padding: 0 0.5rem;
             height: 15%;
+
+            span {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
         }
     }
 }

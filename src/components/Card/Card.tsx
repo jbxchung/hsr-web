@@ -40,7 +40,9 @@ const GameEntityCard: FC<GameEntityCardProps> = ({ entity, entityType }) => {
           }
         </div>
       </div>
-      <div className="card-title">{entity.name}</div>
+      <div className="card-title" title={entity.name}>
+        <span>{entity.name}</span>
+      </div>
     </div>
   );
 };
