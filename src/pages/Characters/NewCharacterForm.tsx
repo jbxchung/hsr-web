@@ -61,7 +61,7 @@ const NewCharacterForm: FC<NewCharacterFormProps> = (props: NewCharacterFormProp
           onChange={e => setCharacterPath(e.target.value as GameEntityPath)}
         >
           {Object.entries(GameEntityPath).map(([key, value]) => (
-            <option value={value}>{key}</option>
+            <option key={key} value={value}>{key}</option>
           ))}
         </select>
       </div>
