@@ -17,14 +17,11 @@ const App: FC = () => {
     <Navbar />
     <div className="main-content-wrapper">
       <Routes>
-        {pages.map(pageConfig => (<Fragment key={pageConfig.path}>
-          <Route  path={pageConfig.path} element={
-            <pageConfig.component key={`${pageConfig.title}_component`} />
-          } />
-          <Route key={`${pageConfig.path}_wildcard`} path={`${pageConfig.path}/*`} element={
+        {pages.map(pageConfig => (
+          <Route key={pageConfig.path} path={`${pageConfig.path}/*`} element={
             <pageConfig.component />
           } />
-        </Fragment>))}
+        ))}
         <Route path="/login" element={<LoginPage />} />
         {/* <Route path="*" element={<Navigate to="/login" />} /> */}
       </Routes>

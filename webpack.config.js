@@ -10,7 +10,11 @@ for (let i = 0; i < rawParams.length - 1; i += 2) {
 
 module.exports = {
   entry: './src/index.tsx',
-  output: { path: path.join(__dirname, 'dist'), filename: 'index.bundle.js' },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/',
+    filename: 'index.bundle.js'
+  },
   mode: cliParams.mode || 'development',
   resolve: {
       extensions: ['.tsx', '.ts', '.js'],
@@ -48,6 +52,9 @@ module.exports = {
     port: 3000,
     hot: true,
     allowedHosts: 'hsr.jbxchung.dev',
+    static: {
+      publicPath: '/'
+    }
   },
   devtool: 'source-map',
 };
