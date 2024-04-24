@@ -19,29 +19,29 @@ const Users: FC = () => {
         <div>Error loading users: {error.toString()}</div>
       )}
       <p>Click the <span className="edit-hint"><EditIcon/>Edit</span> icon to edit a user, or the <span className="delete-hint"><DeleteIcon/>Delete</span> icon to delete a user.</p>
-      <table className="users-table">
-        {isLoading && (
-          <div className="loading-overlay">
-            <Loader />
-          </div>
-        )}
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Created</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {userList?.map(user => (
-            <UserRow key={user.id} user={user} onUserDeleted={() => refreshUserList()} />
-          ))}
-        </tbody>
-      </table>
-
+      {isLoading ? (
+        <div className="loading-overlay">
+          <Loader />
+        </div>
+      ) : (
+        <table className="users-table">
+          <thead>
+            <tr>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Created</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {userList?.map(user => (
+              <UserRow key={user.id} user={user} onUserDeleted={() => refreshUserList()} />
+            ))}
+          </tbody>
+        </table>
+      )}
       <button className="primary new-user-button" onClick={() => setShowNewUserForm(true)}>
         {/* <PlusCircle /> */}
         Add New User
