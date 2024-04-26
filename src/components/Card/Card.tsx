@@ -16,7 +16,7 @@ interface GameEntityCardProps {
 
 const GameEntityCard: FC<GameEntityCardProps> = ({ entity, entityType }) => {
   const navigate = useNavigate();
-  const { thumbnail } = useThumbnail(entity, entityType);
+  const { thumbnail } = useThumbnail(entity.id, entityType);
 
   let element = null;
   if (entityType === GameEntityType.CHARACTER) {

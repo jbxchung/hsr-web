@@ -6,11 +6,13 @@ import Characters from './Characters/Characters';
 import LightCones from './LightCones/LightCones';
 import Users from './Users/Users';
 import Friends from './Friends/Friends';
+import CharacterDetails from './Characters/CharacterDetails';
 
 interface PageConfig {
   title: string;
   path: string;
   component: FC;
+  detailComponent?: FC;
   showInNavbar?: boolean;
 }
 
@@ -25,6 +27,7 @@ export const publicPages: PageConfig[] = [
     title: 'Characters',
     path: '/characters',
     component: Characters,
+    detailComponent: CharacterDetails,
     showInNavbar: true,
   },
   {

@@ -18,9 +18,12 @@ const App: FC = () => {
     <div className="main-content-wrapper">
       <Routes>
         {pages.map(pageConfig => (
-          <Route key={pageConfig.path} path={`${pageConfig.path}/*`} element={
-            <pageConfig.component />
-          } />
+          <Route key={pageConfig.path} path={`${pageConfig.path}`}>
+            <Route path="" element={<pageConfig.component />} />
+            {pageConfig.detailComponent &&
+              <Route path=":entityId" element={<pageConfig.detailComponent />} />
+            }
+          </Route>
         ))}
         <Route path="/login" element={<LoginPage />} />
         {/* <Route path="*" element={<Navigate to="/login" />} /> */}

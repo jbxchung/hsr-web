@@ -14,8 +14,16 @@ export const useGameEntities = (entityType: GameEntityType) => {
   return { response, isLoading, error, invoke };
 };
 
-export const useThumbnail = (entity: GameEntity, entityType: GameEntityType) => {
-  const { response, isLoading, error, invoke } = useApi<Blob>(`/${entityType}/${entity.id}/thumbnail`, {
+export const useGameEntity = (entityId: string, entityType: GameEntityType) => {
+  const { response, isLoading, error, invoke } = useApi<GameEntity>(`/${entityType}/${entityId}`, {
+    cacheResponse: true
+  });
+
+  return { response, isLoading, error, invoke };
+}
+
+export const useThumbnail = (entityId: string, entityType: GameEntityType) => {
+  const { response, isLoading, error, invoke } = useApi<Blob>(`/${entityType}/${entityId}/thumbnail`, {
     cacheResponse: true
   });
 
