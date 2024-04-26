@@ -16,10 +16,7 @@
 }
 
 .character-details {
-    display: flex;
-    flex-direction: column;
-    padding: 2rem;
-    border-radius: 1rem;
+    max-width: 80rem;
 
     .summary {
         display: flex;
