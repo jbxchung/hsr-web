@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 import { useGameEntities } from '../../hooks/useGameEntities';
 import { GameEntityType } from '../../types/GameEntity';
 import CardList from '../../components/Card/CardList';
+import Loader from '../../components/Loader/Loader';
 
 import './Characters.scss';
 import NewCharacterForm from './NewCharacterForm';
@@ -19,6 +20,11 @@ const Characters: FC = () => {
       {showNewCharacterForm && <NewCharacterForm onCharacterCreated={() => console.log('todo: add new character to state')}
         closeModal={() => setShowNewCharacterForm(false)} />
       }
+      {isLoading && (
+        <div className="loading-overlay">
+          <Loader />
+        </div>
+      )}
       {characters && <CardList entities={characters} entityType={GameEntityType.CHARACTER} createNew={() => setShowNewCharacterForm(true)} />}
     </div>
   );
