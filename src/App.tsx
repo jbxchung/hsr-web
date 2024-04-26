@@ -1,5 +1,5 @@
 
-import { FC, Fragment } from 'react';
+import { FC } from 'react';
 import LoginPage from './pages/Login/Login';
 import Navbar from './components/Navbar/Navbar';
 import { Navigate, Route, Routes } from 'react-router-dom';
