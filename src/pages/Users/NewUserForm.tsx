@@ -3,6 +3,7 @@ import { User, UserRole } from '../../types/User';
 import { usePostUser } from '../../hooks/useUsers';
 
 import Input from '../../components/Input/Input';
+import Modal from '../../components/Modal/Modal';
 
 interface NewUserFormProps {
   onUserCreated: (user?: User) => void;
@@ -47,8 +48,8 @@ const NewUserForm: FC<NewUserFormProps> = (props: NewUserFormProps) => {
   }, [errorCreatingUser]);
 
   return (
-    <div className="modal-overlay">
-      <div className="new-user modal form">
+    <Modal closeModal={props.closeModal}>
+      <div className="new-user form">
         <h1>New User</h1>
         <Input
           required={true}
@@ -89,7 +90,7 @@ const NewUserForm: FC<NewUserFormProps> = (props: NewUserFormProps) => {
           </button>
         </div>
       </div>
-    </div>
+    </Modal>
   )
 }
 

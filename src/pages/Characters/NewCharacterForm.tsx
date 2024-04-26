@@ -4,6 +4,7 @@ import { Character, DefaultCharacter, CharacterElement } from '../../types/Chara
 import Input from '../../components/Input/Input';
 import { usePostGameEntity } from '../../hooks/useGameEntities';
 import { GameEntityPath, GameEntityType } from '../../types/GameEntity';
+import Modal from '../../components/Modal/Modal';
 
 interface NewCharacterFormProps {
   onCharacterCreated: (character?: Character) => void;
@@ -62,8 +63,8 @@ const NewCharacterForm: FC<NewCharacterFormProps> = (props: NewCharacterFormProp
   }, [errorCreatingCharacter]);
 
   return (
-    <div className="modal-overlay">
-      <div className="new-character modal form">
+    <Modal closeModal={props.closeModal}>
+      <div className="new-character form">
         <h1>New Character</h1>
         <Input
           required={true}
@@ -128,7 +129,7 @@ const NewCharacterForm: FC<NewCharacterFormProps> = (props: NewCharacterFormProp
           </button>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }
 

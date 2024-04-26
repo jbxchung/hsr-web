@@ -4,6 +4,7 @@ import { Character, DefaultCharacter, CharacterElement } from '../../types/Chara
 import Input from '../../components/Input/Input';
 import { usePostGameEntity } from '../../hooks/useGameEntities';
 import { GameEntityPath, GameEntityType } from '../../types/GameEntity';
+import Modal from '../../components/Modal/Modal';
 
 interface NewCharacterFormProps {
   character: Character;
@@ -17,11 +18,11 @@ const CharacterDetails: FC<NewCharacterFormProps> = (props: NewCharacterFormProp
   const { response: updatedCharacter, isLoading, error: errorCreatingCharacter, invoke: updateCharacter } = usePostGameEntity(GameEntityType.CHARACTER);
 
   return (
-    <div className="modal-overlay">
-      <div className="modal character-details">
+    <Modal closeModal={props.closeModal}>
+      <div className="character-details">
         {JSON.stringify(props.character)}
       </div>
-    </div>
+    </Modal>
   );
 }
 
