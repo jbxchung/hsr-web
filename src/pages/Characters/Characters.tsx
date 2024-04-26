@@ -8,7 +8,7 @@ import './Characters.scss';
 import NewCharacterForm from './NewCharacterForm';
 
 const Characters: FC = () => {
-  const { response: characters, isLoading, error, invoke } = useGameEntities(GameEntityType.CHARACTER);
+  const { response: characters, isLoading, error, invoke: refreshCharacterList } = useGameEntities(GameEntityType.CHARACTER);
 
   const [showNewCharacterForm, setShowNewCharacterForm] = useState<boolean>(false);
 
@@ -17,7 +17,7 @@ const Characters: FC = () => {
       <div className="filter-bar">
         todo: implement filter and search
       </div>
-      {showNewCharacterForm && <NewCharacterForm onCharacterCreated={() => console.log('todo: add new character to state')}
+      {showNewCharacterForm && <NewCharacterForm onCharacterCreated={refreshCharacterList}
         closeModal={() => setShowNewCharacterForm(false)} />
       }
       {isLoading && (

@@ -27,13 +27,13 @@ export const useApi = <T>(url: string | URL | Request, options?: UseApiOptions |
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<any>(null);
 
-  const fetchData = async (requestBody?: any) => {
+  const fetchData = async (requestBody?: any, skipCache: boolean = false) => {
     setIsLoading(true);
 
     const cachedResponse = apiResponseCache[url.toString()];
 
     // todo - need to cache per specific request, not just url
-    if (fetchOptions.cacheResponse && cachedResponse) {
+    if (!skipCache && fetchOptions.cacheResponse && cachedResponse) {
       setData(cachedResponse);
       setError(null);
     } else {
@@ -77,7 +77,9 @@ export const useApi = <T>(url: string | URL | Request, options?: UseApiOptions |
     }
 
     setIsLoading(false);
-  }
+  };
+
+  const invoke = async (requestBody?: any) => fetchData(requestBody, true);
 
   useEffect(() => {
     if (fetchOptions.callOnInit) {
@@ -85,7 +87,7 @@ export const useApi = <T>(url: string | URL | Request, options?: UseApiOptions |
     }
   }, []);
 
-  return { response: data, isLoading, error, invoke: fetchData };
+  return { response: data, isLoading, error, invoke };
 };
 
 export const useApiAuth = <T>(url: string | URL | Request, options?: UseApiOptions | undefined ) => {
