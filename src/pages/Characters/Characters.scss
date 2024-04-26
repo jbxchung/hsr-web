@@ -13,4 +13,27 @@
         background-color: $card-background-color;
         border-radius: 1rem;
     }
+
+    .character-details {
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        background-color: #fff;
+        border-radius: 1rem;
+        color: #000;
+
+        .summary {
+            display: flex;
+            flex-wrap: wrap;
+
+            .summary-details {
+                flex: 1;
+            }
+
+            .entity-portrait {
+                border-radius: 1rem;
+                overflow: hidden;
+            }
+        }
+    }
 }

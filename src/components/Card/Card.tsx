@@ -29,7 +29,7 @@ const GameEntityCard: FC<GameEntityCardProps> = ({ entity, entityType }) => {
         navigate(entity.id);
       }
     }} >
-      <div className={`card-thumbnail rarity-${entity.rarity}`}>
+      <div className={`entity-portrait card-thumbnail rarity-${entity.rarity}`}>
         {thumbnail &&
           <img className="portrait" src={thumbnail} />
         }
