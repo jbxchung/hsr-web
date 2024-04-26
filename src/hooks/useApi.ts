@@ -39,7 +39,7 @@ export const useApi = <T>(url: string | URL | Request, options?: UseApiOptions |
     } else {
       try {
         if (requestBody) {
-          fetchOptions.body = requestBody;
+          fetchOptions.body = requestBody instanceof FormData ? requestBody : JSON.stringify(requestBody);
         }
   
         const response = await fetch(`${BASE_URL}${url}`, fetchOptions);
