@@ -15,7 +15,7 @@ const NewCharacterForm: FC<NewCharacterFormProps> = (props: NewCharacterFormProp
 
   const [createButtonDisabled, setCreateButtonDisabled] = useState<boolean>(true);
 
-  const { gameEntity: createdCharacter, isLoading, error: errorCreatingCharacter, invoke: createCharacter } = usePostGameEntity(GameEntityType.CHARACTER);
+  const { response: createdCharacter, isLoading, error: errorCreatingCharacter, invoke: createCharacter } = usePostGameEntity(GameEntityType.CHARACTER);
 
   const updateCharacter = useCallback((field: keyof Character, value?: any) => {
     const editedCharacter = {

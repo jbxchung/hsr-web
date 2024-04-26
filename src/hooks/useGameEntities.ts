@@ -28,34 +28,19 @@ export const useThumbnail = (entity: GameEntity, entityType: GameEntityType) => 
 }
 
 export const usePostGameEntity = (entityType: GameEntityType) => {
-  const { response: gameEntity, isLoading, error, invoke } = useApiAuth<GameEntity>(`/${entityType}/`, {
+  const { response, isLoading, error, invoke } = useApiAuth<GameEntity>(`/${entityType}/`, {
     callOnInit: false,
     method: 'POST',
   });
   
-  return { gameEntity, isLoading, error, invoke };
+  return { response, isLoading, error, invoke };
 };
 
-// export const usePutUser = (username: string) => {
-//   const { response: user, isLoading, error, invoke } = useApiAuth<User>(`/user/${username}`, {
-//     callOnInit: false,
-//     method: 'PUT',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     }
-//   });
+export const useDeleteGameEntity = (entityId: string, entityType: GameEntityType) => {
+  const { response, isLoading, error, invoke } = useApiAuth<GameEntity>(`/${entityType}/${entityId}`, {
+    callOnInit: false,
+    method: 'DELETE'
+  });
   
-//   return { user, isLoading, error, invoke };
-// };
-
-// export const useDeleteUser = (username: string) => {
-//   const { response: user, isLoading, error, invoke } = useApiAuth<User>(`/user/${username}`, {
-//     callOnInit: false,
-//     method: 'DELETE',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     }
-//   });
-  
-//   return { user, isLoading, error, invoke };
-// }
+  return { response, isLoading, error, invoke };
+}
