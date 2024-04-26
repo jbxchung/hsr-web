@@ -1,14 +1,14 @@
-import { GameEntity } from './GameEntity';
+import { GameEntity, GameEntityPath } from './GameEntity';
 
 export interface CharacterMap {
   [id: string]: Character;
 }
 
 export interface Character extends GameEntity {
-  element: Element;
+  element: CharacterElement;
 }
 
-export enum Element {
+export enum CharacterElement {
   FIRE = 'Fire',
   ICE = 'Ice',
   IMAGINARY = 'Imaginary',
@@ -17,3 +17,12 @@ export enum Element {
   QUANTUM = 'Quantum',
   WIND = 'Wind'
 }
+
+export const DefaultCharacter: Character = {
+  id: '',
+  name: '',
+  rarity: 5,
+  path: GameEntityPath.ABUNDANCE,
+  description: '',
+  element: CharacterElement.FIRE
+};

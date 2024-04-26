@@ -1,4 +1,4 @@
-import { Element } from '../../types/Character';
+import { CharacterElement } from '../../types/Character';
 
 import fire from './fire.webp';
 import ice from './ice.webp';
@@ -9,11 +9,11 @@ import quantum from './quantum.webp';
 import wind from './wind.webp';
 
 export default {
-  [Element.FIRE]: fire,
-  [Element.ICE]: ice,
-  [Element.IMAGINARY]: imaginary,
-  [Element.LIGHTNING]: lightning,
-  [Element.PHYSICAL]: physical,
-  [Element.QUANTUM]: quantum,
-  [Element.WIND]: wind
+  [CharacterElement.FIRE]: fire,
+  [CharacterElement.ICE]: ice,
+  [CharacterElement.IMAGINARY]: imaginary,
+  [CharacterElement.LIGHTNING]: lightning,
+  [CharacterElement.PHYSICAL]: physical,
+  [CharacterElement.QUANTUM]: quantum,
+  [CharacterElement.WIND]: wind
 };

@@ -1,7 +1,5 @@
 import { FC, MouseEvent, useCallback, useEffect, useState } from 'react';
-import { User, UserRole } from '../../types/User';
-import { Character } from '../../types/Character';
-import { usePostUser } from '../../hooks/useUsers';
+import { Character, DefaultCharacter, CharacterElement } from '../../types/Character';
 
 import Input from '../../components/Input/Input';
 import { usePostGameEntity } from '../../hooks/useGameEntities';
@@ -13,23 +11,33 @@ interface NewCharacterFormProps {
 }
 
 const NewCharacterForm: FC<NewCharacterFormProps> = (props: NewCharacterFormProps) => {
-  const [characterName, setCharacterName] = useState<string>('');
-  const [characterPath, setCharacterPath] = useState<GameEntityPath>();
+  const [newCharacter, setNewCharacter] = useState<Character>(DefaultCharacter);
 
   const [createButtonDisabled, setCreateButtonDisabled] = useState<boolean>(true);
 
   const { gameEntity: createdCharacter, isLoading, error: errorCreatingCharacter, invoke: createCharacter } = usePostGameEntity(GameEntityType.CHARACTER);
 
-  // todo: input validation
-  // useEffect(() => {
-  //   setCreateButtonDisabled(!username || !email || !password);
-  // }, [username, email, password, setCreateButtonDisabled]);
+  const updateCharacter = useCallback((field: keyof Character, value: any) => {
+    const editedCharacter = {
+      ...newCharacter,
+      [field]: value,
+    }
+
+    if (field === 'name') {
+      editedCharacter.id = value.toLowerCase().replace(/ /g, '');
+    }
+
+    setNewCharacter(editedCharacter);
+  }, [newCharacter]);
+
+  // input validation
+  useEffect(() => {
+    setCreateButtonDisabled(!newCharacter.name || !newCharacter.description || !newCharacter.thumbnail);
+  }, [newCharacter, setCreateButtonDisabled]);
 
   const submitNewCharacter = useCallback(async () => {
-    createCharacter({
-      
-    });
-  }, []);
+    createCharacter(newCharacter);
+  }, [newCharacter, createCharacter]);
 
   useEffect(() => {
     if (createdCharacter) {
@@ -41,7 +49,7 @@ const NewCharacterForm: FC<NewCharacterFormProps> = (props: NewCharacterFormProp
 
   useEffect(() => {
     if (errorCreatingCharacter) {
-      console.error('error creating user', errorCreatingCharacter);
+      console.error('error creating character', errorCreatingCharacter);
     }
   }, [errorCreatingCharacter]);
 
@@ -52,19 +60,56 @@ const NewCharacterForm: FC<NewCharacterFormProps> = (props: NewCharacterFormProp
         required={true}
         className="form-field"
         placeholder="Character Name"
-        value={characterName}
-        onChange={(e) => setCharacterName(e.target.value)}
+        value={newCharacter?.name}
+        onChange={(e) => updateCharacter('name', e.target.value)}
       />
       <div className="form-field">
+        <span className="dropdown-label">Rarity:</span>
         <select
-          value={characterPath}
-          onChange={e => setCharacterPath(e.target.value as GameEntityPath)}
+          value={newCharacter?.rarity}
+          onChange={e => updateCharacter('rarity', e.target.value)}
+        >
+          <option key={4} value={4}>{4}</option>
+          <option key={5} value={5}>{5}</option>
+        </select>
+      </div>
+      <div className="form-field">
+        <span className="dropdown-label">Path:</span>
+        <select
+          value={newCharacter?.path}
+          onChange={e => updateCharacter('path', e.target.value)}
         >
           {Object.entries(GameEntityPath).map(([key, value]) => (
-            <option key={key} value={value}>{key}</option>
+            <option key={key} value={key}>{value}</option>
           ))}
         </select>
       </div>
+      <div className="form-field">
+        <span className="dropdown-label">Element:</span>
+        <select
+          value={newCharacter?.element}
+          onChange={e => updateCharacter('element', e.target.value)}
+        >
+          {Object.entries(CharacterElement).map(([key, value]) => (
+            <option key={key} value={key}>{value}</option>
+          ))}
+        </select>
+      </div>
+      <Input
+        required={true}
+        className="form-field"
+        placeholder="Description"
+        value={newCharacter?.description}
+        onChange={(e) => updateCharacter('description', e.target.value)}
+      />
+      {/* TODO: style thumbnail upload */}
+      <input
+        type="file"
+        accept="image/webp"
+        className="form-field"
+        value={newCharacter?.thumbnail}
+        onChange={(e) => updateCharacter('thumbnail', e.target.value)}
+      />
       <div className="form-buttons">
         <button className="primary" disabled={createButtonDisabled} onClick={submitNewCharacter}>
           Create
