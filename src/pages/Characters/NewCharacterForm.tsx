@@ -62,69 +62,71 @@ const NewCharacterForm: FC<NewCharacterFormProps> = (props: NewCharacterFormProp
   }, [errorCreatingCharacter]);
 
   return (
-    <div className="new-character modal form">
-      <h1>New Character</h1>
-      <Input
-        required={true}
-        className="form-field"
-        placeholder="Character Name"
-        value={newCharacter?.name}
-        onChange={(e) => updateCharacter('name', e.target.value)}
-      />
-      <div className="form-field">
-        <span className="dropdown-label">Rarity:</span>
-        <select
-          value={newCharacter?.rarity}
-          onChange={e => updateCharacter('rarity', e.target.value)}
-        >
-          <option key={4} value={4}>{4}</option>
-          <option key={5} value={5}>{5}</option>
-        </select>
-      </div>
-      <div className="form-field">
-        <span className="dropdown-label">Path:</span>
-        <select
-          value={newCharacter?.path}
-          onChange={e => updateCharacter('path', e.target.value)}
-        >
-          {Object.entries(GameEntityPath).map(([key, value]) => (
-            <option key={key} value={key}>{value}</option>
-          ))}
-        </select>
-      </div>
-      <div className="form-field">
-        <span className="dropdown-label">Element:</span>
-        <select
-          value={newCharacter?.element}
-          onChange={e => updateCharacter('element', e.target.value)}
-        >
-          {Object.entries(CharacterElement).map(([key, value]) => (
-            <option key={key} value={key}>{value}</option>
-          ))}
-        </select>
-      </div>
-      <Input
-        required={true}
-        className="form-field"
-        placeholder="Description"
-        value={newCharacter?.description}
-        onChange={(e) => updateCharacter('description', e.target.value)}
-      />
-      {/* TODO: style thumbnail upload */}
-      <input
-        type="file"
-        accept="image/webp"
-        className="form-field"
-        // value={newCharacter?.thumbnail || ''}
-        onChange={(e) => updateCharacter('thumbnail', e.target.files ? e.target.files[0] : null)}
-      />
-      <div className="form-buttons">
-        <button className="primary" disabled={createButtonDisabled} onClick={submitNewCharacter}>
-          Create
-        </button>
-        <button className="danger"  onClick={props.closeModal}>
-          Cancel
-        </button>
+    <div className="modal-overlay">
+      <div className="new-character modal form">
+        <h1>New Character</h1>
+        <Input
+          required={true}
+          className="form-field"
+          placeholder="Character Name"
+          value={newCharacter?.name}
+          onChange={(e) => updateCharacter('name', e.target.value)}
+        />
+        <div className="form-field">
+          <span className="dropdown-label">Rarity:</span>
+          <select
+            value={newCharacter?.rarity}
+            onChange={e => updateCharacter('rarity', e.target.value)}
+          >
+            <option key={4} value={4}>{4}</option>
+            <option key={5} value={5}>{5}</option>
+          </select>
+        </div>
+        <div className="form-field">
+          <span className="dropdown-label">Path:</span>
+          <select
+            value={newCharacter?.path}
+            onChange={e => updateCharacter('path', e.target.value)}
+          >
+            {Object.entries(GameEntityPath).map(([key, value]) => (
+              <option key={key} value={key}>{value}</option>
+            ))}
+          </select>
+        </div>
+        <div className="form-field">
+          <span className="dropdown-label">Element:</span>
+          <select
+            value={newCharacter?.element}
+            onChange={e => updateCharacter('element', e.target.value)}
+          >
+            {Object.entries(CharacterElement).map(([key, value]) => (
+              <option key={key} value={key}>{value}</option>
+            ))}
+          </select>
+        </div>
+        <Input
+          required={true}
+          className="form-field"
+          placeholder="Description"
+          value={newCharacter?.description}
+          onChange={(e) => updateCharacter('description', e.target.value)}
+        />
+        {/* TODO: style thumbnail upload */}
+        <input
+          type="file"
+          accept="image/webp"
+          className="form-field"
+          // value={newCharacter?.thumbnail || ''}
+          onChange={(e) => updateCharacter('thumbnail', e.target.files ? e.target.files[0] : null)}
+        />
+        <div className="form-buttons">
+          <button className="primary" disabled={createButtonDisabled} onClick={submitNewCharacter}>
+            Create
+          </button>
+          <button className="danger"  onClick={props.closeModal}>
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   );

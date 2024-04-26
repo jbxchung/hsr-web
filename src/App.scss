@@ -73,24 +73,28 @@ button {
     }
 }
 
-
-.modal {
+.modal-overlay {
     position: fixed;
-    top: 6rem;
-    left: 6rem;
-    right: 6rem;
-    
-    box-shadow: 0rem 0rem 64px 64px rgba(0,0,0,0.5);
+    top: 1rem;
+    left: 0rem;
+    right: 0rem;
+    bottom: 0rem;
+    background: rgba(0, 0, 0, 0.5);
     z-index: 999;
 
-    .form-buttons {
-        display: flex;
-        justify-content: flex-end;
-
-        button {
-            margin-left: 1rem;
+    .modal {
+        margin: 6rem;
+        box-shadow: 0rem 0rem 64px 64px rgba(0,0,0,0.5);
+    
+        .form-buttons {
+            display: flex;
+            justify-content: flex-end;
+    
+            button {
+                margin-left: 1rem;
+            }
         }
-    }
+    }    
 }
 
 .form {

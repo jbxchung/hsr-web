@@ -47,45 +47,47 @@ const NewUserForm: FC<NewUserFormProps> = (props: NewUserFormProps) => {
   }, [errorCreatingUser]);
 
   return (
-    <div className="new-user modal form">
-      <h1>New User</h1>
-      <Input
-        required={true}
-        className="form-field"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <Input
-        required={true}
-        className="form-field"
-        placeholder="Email Address"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <div className="form-field">
-        <select
-          value={role}
-          onChange={e => setRole(e.target.value as UserRole)}
-        >
-          <option value={UserRole.ADMIN}>Admin</option>
-          <option value={UserRole.USER}>User</option>
-        </select>
-      </div>
-      <Input
-        required={true}
-        className="form-field"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <div className="form-buttons">
-        <button className="primary" disabled={createButtonDisabled} onClick={submitNewUser}>
-          Create
-        </button>
-        <button className="danger"  onClick={props.closeModal}>
-          Cancel
-        </button>
+    <div className="modal-overlay">
+      <div className="new-user modal form">
+        <h1>New User</h1>
+        <Input
+          required={true}
+          className="form-field"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <Input
+          required={true}
+          className="form-field"
+          placeholder="Email Address"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <div className="form-field">
+          <select
+            value={role}
+            onChange={e => setRole(e.target.value as UserRole)}
+          >
+            <option value={UserRole.ADMIN}>Admin</option>
+            <option value={UserRole.USER}>User</option>
+          </select>
+        </div>
+        <Input
+          required={true}
+          className="form-field"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <div className="form-buttons">
+          <button className="primary" disabled={createButtonDisabled} onClick={submitNewUser}>
+            Create
+          </button>
+          <button className="danger"  onClick={props.closeModal}>
+            Cancel
+          </button>
+        </div>
       </div>
     </div>
   )
