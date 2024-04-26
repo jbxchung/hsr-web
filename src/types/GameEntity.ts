@@ -4,7 +4,7 @@ export interface GameEntity {
   rarity: number;
   path: GameEntityPath;
   description: string;
-  thumbnail?: string;
+  thumbnail?: File;
 }
 
 export enum GameEntityPath {

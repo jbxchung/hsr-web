@@ -31,9 +31,6 @@ export const usePostGameEntity = (entityType: GameEntityType) => {
   const { response: gameEntity, isLoading, error, invoke } = useApiAuth<GameEntity>(`/${entityType}/`, {
     callOnInit: false,
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    }
   });
   
   return { gameEntity, isLoading, error, invoke };

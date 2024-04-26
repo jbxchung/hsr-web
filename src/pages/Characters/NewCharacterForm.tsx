@@ -17,7 +17,7 @@ const NewCharacterForm: FC<NewCharacterFormProps> = (props: NewCharacterFormProp
 
   const { gameEntity: createdCharacter, isLoading, error: errorCreatingCharacter, invoke: createCharacter } = usePostGameEntity(GameEntityType.CHARACTER);
 
-  const updateCharacter = useCallback((field: keyof Character, value: any) => {
+  const updateCharacter = useCallback((field: keyof Character, value?: any) => {
     const editedCharacter = {
       ...newCharacter,
       [field]: value,
@@ -36,7 +36,15 @@ const NewCharacterForm: FC<NewCharacterFormProps> = (props: NewCharacterFormProp
   }, [newCharacter, setCreateButtonDisabled]);
 
   const submitNewCharacter = useCallback(async () => {
-    createCharacter(newCharacter);
+    const formdata = new FormData();
+    formdata.append('id', newCharacter.id);
+    formdata.append('name', newCharacter.name);
+    formdata.append('rarity', newCharacter.rarity.toString());
+    formdata.append('path', newCharacter.path.toUpperCase().replace(/ /g, '_'));
+    formdata.append('element', newCharacter.element.toUpperCase().replace(/ /g, '_'));
+    formdata.append('description', newCharacter.description);
+    formdata.append('thumbnail', new Blob([newCharacter.thumbnail!]), `${newCharacter.id}.webp`);
+    createCharacter(formdata);
   }, [newCharacter, createCharacter]);
 
   useEffect(() => {
@@ -107,8 +115,8 @@ const NewCharacterForm: FC<NewCharacterFormProps> = (props: NewCharacterFormProp
         type="file"
         accept="image/webp"
         className="form-field"
-        value={newCharacter?.thumbnail}
-        onChange={(e) => updateCharacter('thumbnail', e.target.value)}
+        // value={newCharacter?.thumbnail || ''}
+        onChange={(e) => updateCharacter('thumbnail', e.target.files ? e.target.files[0] : null)}
       />
       <div className="form-buttons">
         <button className="primary" disabled={createButtonDisabled} onClick={submitNewCharacter}>

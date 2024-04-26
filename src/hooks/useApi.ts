@@ -39,7 +39,7 @@ export const useApi = <T>(url: string | URL | Request, options?: UseApiOptions |
     } else {
       try {
         if (requestBody) {
-          fetchOptions.body = JSON.stringify(requestBody);
+          fetchOptions.body = requestBody;
         }
   
         const response = await fetch(`${BASE_URL}${url}`, fetchOptions);
