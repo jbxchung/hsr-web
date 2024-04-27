@@ -14,7 +14,7 @@ const Users: FC = () => {
   const [showNewUserForm, setShowNewUserForm] = useState<boolean>(false);
 
   return (
-    <div className="users">
+    <div className="main-content users">
       {error && (
         <div>Error loading users: {error.toString()}</div>
       )}
