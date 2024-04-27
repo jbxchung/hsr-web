@@ -29,7 +29,7 @@ const PullRecord: FC<PullRecordProps> = ({ pullResult }) => {
       <div className="pull-entity-name">
         {pullResult.entity.name}
       </div>
-      <div className="pull-thumbnail">
+      <div className={`pull-thumbnail ${pullResult.entityType}`}>
       {thumbnail &&
         <img src={thumbnail} />
       }

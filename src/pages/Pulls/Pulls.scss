@@ -32,10 +32,18 @@
         }
 
         .pull-thumbnail {
-            height: 300%;
             width: 12rem;
+            text-align: center;
             overflow: hidden;
-            transform: translateY(30px);
+
+            &.character {
+                height: 300%;
+                transform: translateY(30px);
+            }
+
+            &.lightcone {
+                height: 120%;
+            }
 
             img {
                 height: 100%;
