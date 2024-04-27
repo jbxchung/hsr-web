@@ -1,9 +1,10 @@
 .pull-records {
     .pull-record {
         display: flex;
-        height: 3rem;
+        height: 4rem;
         align-items: center;
         justify-content: space-between;
+        overflow: hidden;
 
         &.rarity-5 {
             background: linear-gradient(to right, rgb(156, 109, 105, 0.8), rgb(206, 166, 106, 0.8));
@@ -26,8 +27,21 @@
             font-weight: bold;
         }
 
+        .pull-thumbnail {
+            height: 300%;
+            width: 12rem;
+            overflow: hidden;
+            transform: translateY(30px);
+
+            img {
+                height: 100%;
+            }
+        }
+
         .pull-entity-icons {
             padding-right: 1rem;
+            text-align: right;
+            width: 6rem;
             
             img {
                 height: 2rem;

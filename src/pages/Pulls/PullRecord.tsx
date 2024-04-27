@@ -30,9 +30,9 @@ const PullRecord: FC<PullRecordProps> = ({ pullResult }) => {
         {pullResult.entity.name}
       </div>
       <div className="pull-thumbnail">
-      {/* {thumbnail &&
+      {thumbnail &&
         <img src={thumbnail} />
-      } */}
+      }
       </div>
       <div className="pull-entity-icons">
         {element &&
