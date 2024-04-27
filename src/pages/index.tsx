@@ -35,6 +35,7 @@ export const publicPages: PageConfig[] = [
     title: 'Light Cones',
     path: '/lightcones',
     component: LightCones,
+    detailComponent: () => <div>todo: implement light cone details page</div>,
     showInNavbar: true,
   }
 ];

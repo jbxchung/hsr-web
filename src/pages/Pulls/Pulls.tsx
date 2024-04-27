@@ -85,7 +85,7 @@ const PullRecords: FC = () => {
       {pullList &&
         <div className="pull-list">
           {pullList.map(pull => (
-            <PullRecord key={pull.timestamp} pullResult={pull} />
+            <PullRecord key={pull.id} pullResult={pull} />
           ))}
         </div>
       }
