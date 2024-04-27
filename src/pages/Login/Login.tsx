@@ -68,34 +68,36 @@ const LoginPage: FC = () => {
   }, [handleKeyPressed]);
 
   return (
-    <div className="form login-form">
-      {isLoading && (
-        <div className="loading-overlay">
-          <Loader />
-        </div>
-      )}
-      <h1>Login</h1>
-      <Input
-        className="form-field"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <Input
-        className="form-field"
-        placeholder="Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button className="primary form-button" disabled={loginButtonDisabled} onClick={submitLogin}>
-        Login
-      </button>
-      <span>{loginError}</span>
-      <p className="disclaimer">
-        <b>Note: </b>
-        new account creation is centrally managed. Please check the assignment submission for credentials.
-      </p>
+    <div className="login-wrapper">
+      <div className="form login-form">
+        {isLoading && (
+          <div className="loading-overlay">
+            <Loader />
+          </div>
+        )}
+        <h1>Login</h1>
+        <Input
+          className="form-field"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <Input
+          className="form-field"
+          placeholder="Password"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <button className="primary form-button" disabled={loginButtonDisabled} onClick={submitLogin}>
+          Login
+        </button>
+        <span>{loginError}</span>
+        <p className="disclaimer">
+          <b>Note: </b>
+          new account creation is centrally managed. Please check the assignment submission for credentials.
+        </p>
+      </div>
     </div>
   )
 };
