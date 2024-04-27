@@ -7,6 +7,7 @@ import LightCones from './LightCones/LightCones';
 import Users from './Users/Users';
 import Friends from './Friends/Friends';
 import CharacterDetails from './Characters/CharacterDetails';
+import PullRecords from './Pulls/Pulls';
 
 interface PageConfig {
   title: string;
@@ -42,7 +43,7 @@ const userPages = [
   {
     title: 'Pull Records',
     path: '/pulls',
-    component: () => <div>POST AUTH ONLY: pull records page placeholder</div>,
+    component: PullRecords,
     showInNavbar: true,
   },
   {
