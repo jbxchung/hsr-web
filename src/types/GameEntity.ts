@@ -18,6 +18,6 @@ export enum GameEntityPath {
 }
 
 export enum GameEntityType {
-  CHARACTER = 'character',
-  LIGHT_CONE = 'lightcone'
+  CHARACTER = 'Character',
+  LIGHT_CONE = 'LightCone'
 }

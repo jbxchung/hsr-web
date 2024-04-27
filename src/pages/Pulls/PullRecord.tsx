@@ -17,7 +17,7 @@ const PullRecord: FC<PullRecordProps> = ({ pullResult }) => {
   const formattedTimestamp = new Date(pullResult.timestamp).toLocaleString().replace(/,/, '');
 
   let element = null;
-  if (pullResult.entityType === GameEntityType.CHARACTER) {
+  if (pullResult.entityType.toLowerCase() === GameEntityType.CHARACTER.toLowerCase()) {
     element = (pullResult.entity as Character).element;
   }
 
