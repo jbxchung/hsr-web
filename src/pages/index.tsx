@@ -7,6 +7,7 @@ import LightCones from './LightCones/LightCones';
 import Users from './Users/Users';
 import Friends from './Friends/Friends';
 import CharacterDetails from './Characters/CharacterDetails';
+import PullRecords from './Pulls/Pulls';
 
 interface PageConfig {
   title: string;
@@ -34,6 +35,7 @@ export const publicPages: PageConfig[] = [
     title: 'Light Cones',
     path: '/lightcones',
     component: LightCones,
+    detailComponent: () => <div>todo: implement light cone details page</div>,
     showInNavbar: true,
   }
 ];
@@ -42,7 +44,7 @@ const userPages = [
   {
     title: 'Pull Records',
     path: '/pulls',
-    component: () => <div>POST AUTH ONLY: pull records page placeholder</div>,
+    component: PullRecords,
     showInNavbar: true,
   },
   {

@@ -2,7 +2,7 @@ import { useApi, useApiAuth } from './useApi';
 import { GameEntity, GameEntityType } from '../types/GameEntity';
 
 export const useGameEntities = (entityType: GameEntityType) => {
-  const { response, isLoading, error, invoke } = useApi<Array<GameEntity>>(`/${entityType}/all`, {
+  const { response, isLoading, error, invoke } = useApi<Array<GameEntity>>(`/${entityType.toLowerCase()}/all`, {
     cacheResponse: true
   });
 
@@ -15,7 +15,7 @@ export const useGameEntities = (entityType: GameEntityType) => {
 };
 
 export const useGameEntity = (entityId: string, entityType: GameEntityType) => {
-  const { response, isLoading, error, invoke } = useApi<GameEntity>(`/${entityType}/${entityId}`, {
+  const { response, isLoading, error, invoke } = useApi<GameEntity>(`/${entityType.toLowerCase()}/${entityId}`, {
     cacheResponse: true
   });
 
@@ -23,7 +23,7 @@ export const useGameEntity = (entityId: string, entityType: GameEntityType) => {
 }
 
 export const useThumbnail = (entityId: string, entityType: GameEntityType) => {
-  const { response, isLoading, error, invoke } = useApi<Blob>(`/${entityType}/${entityId}/thumbnail`, {
+  const { response, isLoading, error, invoke } = useApi<Blob>(`/${entityType.toLowerCase()}/${entityId}/thumbnail`, {
     cacheResponse: true
   });
 
@@ -36,7 +36,7 @@ export const useThumbnail = (entityId: string, entityType: GameEntityType) => {
 }
 
 export const usePostGameEntity = (entityType: GameEntityType) => {
-  const { response, isLoading, error, invoke } = useApiAuth<GameEntity>(`/${entityType}/`, {
+  const { response, isLoading, error, invoke } = useApiAuth<GameEntity>(`/${entityType.toLowerCase()}/`, {
     callOnInit: false,
     method: 'POST',
   });
@@ -45,7 +45,7 @@ export const usePostGameEntity = (entityType: GameEntityType) => {
 };
 
 export const useDeleteGameEntity = (entityId: string, entityType: GameEntityType) => {
-  const { response, isLoading, error, invoke } = useApiAuth<GameEntity>(`/${entityType}/${entityId}`, {
+  const { response, isLoading, error, invoke } = useApiAuth<GameEntity>(`/${entityType.toLowerCase()}/${entityId}`, {
     callOnInit: false,
     method: 'DELETE'
   });

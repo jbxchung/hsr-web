@@ -115,7 +115,7 @@ const Friends: FC = () => {
   }, [addFriendName]);
 
   return (
-    <div className="friends-page">
+    <div className="main-content friends-page">
       <p>todo: add friend search</p>
       <div className="new-friend-request">
         <Input
