@@ -1,0 +1,34 @@
+@import '../../styles/variables.scss';
+
+.items-page {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .item-row {
+        display: flex;
+        height: 2rem;
+        align-items: center;
+        justify-content: space-between;
+
+        .action-icon {
+            text-align: center;
+            cursor: pointer;
+
+            svg {
+                height: 1.5rem;
+                width: 1.5rem;
+            }
+
+            &.delete {
+                &:hover {
+                    fill: $button-danger-background-color;
+                }
+                
+                &:active {
+                    fill: $button-danger-background-color-active;
+                }
+            }
+        }
+    }
+}
