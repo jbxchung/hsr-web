@@ -3,11 +3,12 @@ import Login from './Login/Login';
 import { User, UserRole } from '../types/User';
 import Home from './Home/Home';
 import Characters from './Characters/Characters';
-import LightCones from './LightCones/LightCones';
-import Users from './Users/Users';
-import Friends from './Friends/Friends';
 import CharacterDetails from './Characters/CharacterDetails';
+import Friends from './Friends/Friends';
+import Items from './Items/Items';
+import LightCones from './LightCones/LightCones';
 import PullRecords from './Pulls/Pulls';
+import Users from './Users/Users';
 
 interface PageConfig {
   title: string;
@@ -37,6 +38,12 @@ export const publicPages: PageConfig[] = [
     component: LightCones,
     detailComponent: () => <div>todo: implement light cone details page</div>,
     showInNavbar: true,
+  },
+  {
+    title: 'Items',
+    path: '/items',
+    component: Items,
+    showInNavbar: true,
   }
 ];
 
@@ -45,6 +52,12 @@ const userPages = [
     title: 'Pull Records',
     path: '/pulls',
     component: PullRecords,
+    showInNavbar: true,
+  },
+  {
+    title: 'Inventory',
+    path: '/inventory',
+    component: () => <div>TODO: inventory page</div>,
     showInNavbar: true,
   },
   {
