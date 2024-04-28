@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 
 import './Items.scss';
 import { useDeleteItem } from '../../hooks/useItems';
@@ -17,6 +17,14 @@ const ItemRow: FC<ItemRowProps> = ({ item, onDelete }) => {
 
   const { response: deletedItem, isLoading: deleteItemLoading, error: deleteItemError, invoke: deleteItem } = useDeleteItem(item.id);
 
+  useEffect(() => {
+    if (deleteItemError) {
+      alert(deleteItemError);
+    } else if (deletedItem) {
+      onDelete(item);
+    }
+  }, [deletedItem, deleteItemError]);
+
   return (
     <div className="item-row">
       <div className="item-name">
@@ -26,10 +34,7 @@ const ItemRow: FC<ItemRowProps> = ({ item, onDelete }) => {
         <span
           className={`action-icon delete`}
           title={'Delete'}
-          onClick={() => {
-            deleteItem();
-            onDelete(item);
-          }}
+          onClick={() => deleteItem()}
         >
           <DeleteIcon />
         </span>

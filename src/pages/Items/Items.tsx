@@ -63,7 +63,11 @@ const Items: FC = () => {
             name: e.target.value
           })} />
           <button className="primary add-item-button" onClick={() => {
-            addItem(newItem);
+            if (itemList.find(i => i.id === newItem.id)) {
+              alert('This item already exists, please enter a different name');
+            } else {
+              addItem(newItem);
+            }
           }} >
             Add New Item
           </button>
@@ -72,7 +76,7 @@ const Items: FC = () => {
       <div className="item-list">
         <h2>Item List:</h2>
         {itemList?.map(item => (
-          <ItemRow item={item} onDelete={onItemDeleted} />
+          <ItemRow key={item.id} item={item} onDelete={onItemDeleted} />
         ))}
       </div>
     </div>
