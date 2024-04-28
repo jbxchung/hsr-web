@@ -9,6 +9,7 @@ import Items from './Items/Items';
 import LightCones from './LightCones/LightCones';
 import PullRecords from './Pulls/Pulls';
 import Users from './Users/Users';
+import Inventory from './Inventory/Inventory';
 
 interface PageConfig {
   title: string;
@@ -57,7 +58,7 @@ const userPages = [
   {
     title: 'Inventory',
     path: '/inventory',
-    component: () => <div>TODO: inventory page</div>,
+    component: Inventory,
     showInNavbar: true,
   },
   {

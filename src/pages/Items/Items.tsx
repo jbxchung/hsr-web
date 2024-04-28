@@ -4,13 +4,14 @@ import { GameEntityType } from '../../types/GameEntity';
 import CardList from '../../components/Card/CardList';
 import Loader from '../../components/Loader/Loader';
 
-import './Items.scss';
 import { useDeleteItem, useItems, usePostItem } from '../../hooks/useItems';
 import { useAuth } from '../../hooks/useAuth';
 import { UserRole } from '../../types/User';
 import { DefaultGameItem, GameItem } from '../../types/GameItem';
 import DeleteIcon from '../../components/Icons/Delete';
 import ItemRow from './ItemRow';
+
+import './Items.scss';
 
 const Items: FC = () => {
   const { user } = useAuth();
