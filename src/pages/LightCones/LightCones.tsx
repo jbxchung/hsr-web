@@ -1,13 +1,15 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useGameEntities } from '../../hooks/useGameEntities';
 import { GameEntityType } from '../../types/GameEntity';
 import CardList from '../../components/Card/CardList';
 import Loader from '../../components/Loader/Loader';
+import NewLightConeForm from './NewLightConeForm';
 
 import './LightCones.scss';
 
 const LightCones: FC = () => {
-  const { response: lightCones, isLoading, error, invoke } = useGameEntities(GameEntityType.LIGHT_CONE);
+  const { response: lightCones, isLoading, error, invoke: refreshLightConeList } = useGameEntities(GameEntityType.LIGHT_CONE);
+  const [showNewLightConeForm, setShowNewLightConeForm] = useState<boolean>(false);
 
   return (
     <div className="light-cones">
@@ -19,7 +21,13 @@ const LightCones: FC = () => {
           <Loader />
         </div>
       )}
-      {lightCones && <CardList entities={lightCones} entityType={GameEntityType.LIGHT_CONE} />}
+      {showNewLightConeForm &&
+        <NewLightConeForm
+          onLightConeCreated={refreshLightConeList}
+          closeModal={() => setShowNewLightConeForm(false)}
+        />
+      }
+      {lightCones && <CardList entities={lightCones} entityType={GameEntityType.LIGHT_CONE} createNew={() => setShowNewLightConeForm(true)} />}
     </div>
   );
 };
