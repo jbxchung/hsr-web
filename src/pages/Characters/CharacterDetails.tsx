@@ -2,15 +2,21 @@ import { FC, MouseEvent, useCallback, useEffect, useState } from 'react';
 import { Character, DefaultCharacter, CharacterElement } from '../../types/Character';
 
 import Input from '../../components/Input/Input';
-import { useGameEntity, usePostGameEntity, useThumbnail } from '../../hooks/useGameEntities';
+import { useDeleteGameEntity, useGameEntity, usePostGameEntity, useThumbnail } from '../../hooks/useGameEntities';
 import { GameEntityPath, GameEntityType } from '../../types/GameEntity';
 import Loader from '../../components/Loader/Loader';
 import pathIcons from '../../assets/paths';
 import elementIcons from '../../assets/elements';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { UserRole } from '../../types/User';
+import { useAuth } from '../../hooks/useAuth';
+import DeleteIcon from '../../components/Icons/Delete';
 
 const CharacterDetails: FC = () => {
   const { entityId } = useParams();
+  const { user } = useAuth();
+
+  const navigate = useNavigate();
 
   const { response: characterDetail, isLoading: characterLoading } = useGameEntity(entityId!, GameEntityType.CHARACTER);
   const { thumbnail, isLoading: thumbnailLoading } = useThumbnail(entityId!, GameEntityType.CHARACTER);
@@ -23,6 +29,14 @@ const CharacterDetails: FC = () => {
   // for admin only
   const [editedCharacter, setEditedCharacter] = useState<Character>(DefaultCharacter);
   const { response: updatedCharacter, isLoading, error: errorCreatingCharacter, invoke: updateCharacter } = usePostGameEntity(GameEntityType.CHARACTER);
+
+  const { response: deletedCharacter, invoke: deleteCharacter } = useDeleteGameEntity(entityId || '', GameEntityType.CHARACTER);
+  const onDeleteClicked = () => {
+    if (window.confirm(`Are you sure you want to delete ${entityId}? This will require a page refresh to be reflected in the list.`)) {
+      deleteCharacter();
+      navigate('/characters');
+    }
+  };
   
   return (
     <div className="main-content character-details">
@@ -50,6 +64,11 @@ const CharacterDetails: FC = () => {
         <p>
           Coming Soon: Additional details on stats and upgrades
         </p>
+        {user?.role === UserRole.ADMIN && (
+          <div className="admin-actions">
+            <button className="danger" onClick={onDeleteClicked}>Delete Character</button>
+          </div>
+        )}
       </>}
     </div>
   );
