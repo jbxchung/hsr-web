@@ -10,6 +10,7 @@ import LightCones from './LightCones/LightCones';
 import PullRecords from './Pulls/Pulls';
 import Users from './Users/Users';
 import Inventory from './Inventory/Inventory';
+import LightConeDetails from './LightCones/LightConeDetails';
 
 interface PageConfig {
   title: string;
@@ -37,7 +38,7 @@ export const publicPages: PageConfig[] = [
     title: 'Light Cones',
     path: '/lightcones',
     component: LightCones,
-    detailComponent: () => <div>todo: implement light cone details page</div>,
+    detailComponent: LightConeDetails,
     showInNavbar: true,
   },
   {
